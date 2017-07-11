@@ -12,7 +12,7 @@
         android:background="@color/colorAccent"
         android:backgroundTint="@color/colorAccent"
         android:elevation="24dp"
-        android:text="ALOHA"
+        android:text="boah"
         android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
