@@ -9,8 +9,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CIAOOOOOOO"
-        android:textSize="30sp"
+        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:elevation="24dp"
+        android:text="CIAO"
+        android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
