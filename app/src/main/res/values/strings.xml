@@ -1,3 +1,135 @@
 <resources>
-    <string name="app_name">CondoManager</string>
+
+    <string name="menu">Menu</string>
+    <string name="action_search">Search</string>
+    <string name="action_cart">Cart</string>
+    <string name="action_hot_deals">Hot deals</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_fragment">Search Fragment</string>
+    <string name="cart_fragment">Cart Fragment</string>
+    <string name="hot_deals_fragment">Hot Deals Fragment</string>
+
+
+    <string name="app_name">CondomiNew</string>
+
+    <!-- title activity -->
+    <string name="title_login">Login</string>
+    <string name="title_register">Registration</string>
+    <string name="title_amministratore_home">Segnalazioni</string>
+    <string name="title_fornitore_home">Fornitore home</string>
+    <string name="title_condomino_home">Condomino home</string>
+    <string name="title_details_segnalazione">Dettagli segnalazione</string>
+
+    <!-- content_login -->
+    <string name="enter_mail"> Enter mail</string>
+    <string name="enter_password">Enter password</string>
+    <string name="str_login">LOGIN</string>
+    <string name="str_signin">SIGN IN</string>
+    <string name="logo_app">logo application</string>
+
+    <!-- LoginActivity -->
+    <string name="err_read_google"> Error while reading Google</string>
+    <string name="err_login">Incorrect username and password</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="insert_name_password">Insert mail and password</string>
+    <string name="login"> Login in progress... </string>
+
+    <!-- RegisterAmministratoreActivity -->
+    <string name="name_surname_insert">Insert name or surname</string>
+    <string name="name_surname_invalid">Invalid name or surname</string>
+    <string name="mail_invalid">Please, insert valid mail</string>
+    <string name="empty_fields">Some fields are empty. Please, insert the values </string>
+    <string name="psw_len_incorrect">Password length incorrect, must be greater then 5</string>
+    <string name="type_user">Please, choose a type of user</string>
+    <string name="registration_problem">An error occured while registration</string>
+    <string name="connection_failed">Connection failded!</string>
+    <string name="ok">ok</string>
+
+    <!-- activity_amministratore_register -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_studio">Studio di amministrazione</string>
+    <string name="hint_amministratore">Nome amministratore</string>
+    <string name="hint_sede">Sede</string>
+    <string name="hint_telefono">Telefono</string>
+    <string name="hint_mail">Email</string>
+    <string name="label_activation_mode">ACTIVE PROFILE AS:</string>
+    <string name="radiogroup_amministratore">AMMINISTRATORE</string>
+    <string name="radiogroup_fornitore">FORNITORE</string>
+    <string name="confirm">CONFIRM</string>
+
+    <!-- activity_fornitore_register -->
+    <string name="hint_username_f">Username</string>
+    <string name="hint_password_f">Password</string>
+    <string name="hint_azienda_f">Azienda</string>
+    <string name="hint_indirizzo_f">Indirizzo</string>
+    <string name="hint_telefono_f">Telefono</string>
+    <string name="hint_mail_f">Email</string>
+    <string name="hint_partitaIVA_f">Partita IVA</string>
+    <string name="hint_responsabile_f">Responsabile</string>
+
+
+    <!-- dialog conferma invio ticket -->
+    <string name="title_conferma_invio_ticket">Segnalazione inviata</string>
+    <string name="conferma_invio_ticket">\n\n Sarà possibile seguire lo stato della segnalazione nella sezione \"Ticket in corso\"</string>
+
+    <!-- dialog conferma archiviazione -->
+    <string name="title_conferma_archiviazione">Segnalazione archiviata</string>
+    <string name="conferma_archiviazione">\n\n Puoi trovare la segnalazione nella sezione \"Archivio\"</string>
+
+    <!-- dialog conferma segnalazione rifiutata -->
+    <string name="title_conferma_segnalazione_rifiutata">Segnalazione rifiutata</string>
+    <string name="conferma_segnalazione_rifiutata">\n\n Puoi trovare la segnalazione nella sezione \"Archivio\"</string>
+
+    <!-- dialog conferma intervento accettato -->
+    <string name="title_conferma_intervento_accettato">Intervento accettato</string>
+    <string name="conferma_intervento_accettato">\n\n Tutte le informazioni relative all\'intervento saranno visibili nella sezione \"Interventi in programma\"</string>
+
+    <!-- dialog conferma intervento rifiutato -->
+    <string name="title_conferma_intervento_rifiutato">Intervento rifiutato</string>
+    <string name="conferma_intervento_rifiutato">\n\n L\'intervento sarà eliminato dalla sezione \"Richieste intervento\"</string>
+
+    <!-- dialog conferma intervento rifiutato -->
+    <string name="title_rapporto_intervento">Rapporto intervento</string>
+    <string name="rapporto_intervento">Descrivere l\'intervento effettuato</string>
+    <string name="rapporto_intervento_annulla">chiudi</string>
+    <string name="rapporto_intervento_conferma">conferma</string>
+
+    <!-- dialog nuova segnalazione - lato condomino -->
+    <string name="title_nuova_segnalazione">Nuova segnalazione</string>
+    <string name="nuova_segnalazione">Inserire la segnalazione di guasto riscontrata nel condominio</string>
+    <string name="nuova_segnalazione_annulla">chiudi</string>
+    <string name="nuova_segnalazione_conferma">invia</string>
+
+    <!-- dialog nuova segnalazione inviata - lato condomino -->
+    <string name="title_segnalazione_inviata">Segnalazione inviata</string>
+    <string name="segnalazione_inviata">\n\n Tutte le informazioni relative alla segnalazione inviata saranno visibili nella sezione \"Bacheca segnalazioni\"</string>
+    <string name="segnalazione_ok">ok</string>
+
+    <!-- dialog chiama amministratore -->
+    <string name="title_chiama_ammministratore">Chiama</string>
+    <string name="chiama_amministratore">Chiamare amministratore?"</string>
+    <string name="chiama_amministratore_si">si</string>
+    <string name="chiama_amministratore_no">no</string>
+
+    <!-- dialog chiama fornitore -->
+    <string name="title_chiama_fornitore">Chiama</string>
+    <string name="chiama_fornitore">Chiamare fornitore?"</string>
+    <string name="chiama_fornitore_si">si</string>
+    <string name="chiama_fornitore_no">no</string>
+
+    <string name="notification_message"> This is a message of work!!</string>
+    <string name="home">home</string>
+    <string name="registration_detail">REGISTRATION DETAILS</string>
+
+    <string name="registration_success">Registration successfully occurred.\n\nPress
+        ok to enter in your personal area. </string>
+
+    <!-- splash_layout-->
+    <string name="splash_descr">image load app</string>
+    <string name="title_activity_main">MainActivity</string>
+
+
 </resources>
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tesi</string>
+
+    <!-- title activity -->
+    <string name="title_login">Accedi</string>
+    <string name="title_register">Registrazione</string>
+    <string name="title_amministratore_home">Segnalazioni</string>
+    <string name="title_fornitore_home">Fornitore home</string>
+    <string name="title_condomino_home">Condomino home</string>
+    <string name="title_details_segnalazione">Dettagli segnalazione</string>
+
+        <!-- content_login -->
+    <string name="enter_mail"> Inserisci mail</string>
+    <string name="enter_password">Inserisci password</string>
+    <string name="str_login">ACCEDI</string>
+    <string name="str_signin">REGISTRATI</string>
+    <string name="logo_app">logo dell\'applicazione kiu</string>
+
+    <!-- LoginActivity -->
+    <string name="err_read_google"> Errore nella lettura di Google</string>
+    <string name="err_login"> username e password non corretti</string>
+    <string name="auth_failed">Autenticazione fallita</string>
+    <string name="insert_name_password">Inserire mail e password</string>
+    <string name="login"> Login in progress... </string>
+
+    <!-- RegisterAmministratoreActivity -->
+    <string name="name_surname_insert">Inserire il nome o il cognome</string>
+    <string name="name_surname_invalid">Il nome o il cognome sono non validi</string>
+    <string name="mail_invalid">per favore, inserire una mail valida</string>
+    <string name="empty_fields">Alcuni campi sono vuoti. Per favore, inserisci i valori </string>
+    <string name="psw_len_incorrect">Lunghezza password deve essere maggiore di 5</string>
+    <string name="type_user">Per favore, scegli una tipologia di utente</string>
+    <string name="registration_problem">Un errore si è verificato durante la registrazione</string>
+    <string name="connection_failed">Connessione fallita!</string>
+
+    <!-- activity_amministratore_register -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_studio">Studio di amministrazione</string>
+    <string name="hint_amministratore">Nome amministratore</string>
+    <string name="hint_sede">Sede</string>
+    <string name="hint_telefono">Telefono</string>
+    <string name="hint_mail">Email</string>
+    <string name="label_activation_mode">ATTIVA IL PROFILO COME:</string>
+    <string name="radiogroup_amministratore">AMMINISTRATORE</string>
+    <string name="radiogroup_fornitore">FORNITORE</string>
+    <string name="confirm">CONFERMA</string>
+
+
+</resources>
