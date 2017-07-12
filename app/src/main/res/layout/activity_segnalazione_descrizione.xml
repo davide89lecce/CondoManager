@@ -15,7 +15,7 @@
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
         android:layout_weight="7"
-        tools:context="com.gambino_serra.condomanager.View.Amministratore.Segnalazione.SegnalazioneDescrizione">
+        tools:context="com.gambino_serra.condomanager_amministratore.View.Amministratore.Segnalazione.SegnalazioneDescrizione">
 
         <LinearLayout
             android:layout_width="match_parent"

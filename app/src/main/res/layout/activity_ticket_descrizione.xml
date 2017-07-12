@@ -15,7 +15,7 @@
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
         android:layout_weight="7"
-        tools:context="com.gambino_serra.condomanager.View.Amministratore.NuovoTicket.TicketDescrizione">
+        tools:context="com.gambino_serra.condomanager_amministratore.View.Amministratore.NuovoTicket.TicketDescrizione">
 
         <LinearLayout
             android:layout_width="match_parent"
