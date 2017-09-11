@@ -21,6 +21,8 @@ import static com.gambino_serra.condomanager_amministratore.Controller.Login.che
 import static com.gambino_serra.condomanager_amministratore.Controller.Login.checkLogin;
 import static com.gambino_serra.condomanager_amministratore.Controller.Login.startRegisterActivity;
 
+//HEY :D
+
 public class LoginActivity extends BaseActivity
         implements Response.Listener<String>, Response.ErrorListener {
 
