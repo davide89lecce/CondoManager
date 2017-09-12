@@ -21,6 +21,7 @@
 package com.gambino_serra.condomanager_amministratore.View.Stabile.Avvisi;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -48,7 +49,7 @@ import java.util.Map;
 
 
 public class BachecaAvvisi extends Fragment {
-
+    private static final String MY_PREFERENCES = "preferences";
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
@@ -57,6 +58,9 @@ public class BachecaAvvisi extends Fragment {
 
     private Firebase firebaseDB;
     private FirebaseAuth firebaseAuth;
+    private String idStabile;
+
+    private Bundle bundle;
 
     private String uidCondomino;
     private String stabile;
@@ -72,6 +76,26 @@ public class BachecaAvvisi extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, getActivity().MODE_PRIVATE);
+
+        if (getActivity().getIntent().getExtras() != null) {
+
+            bundle = getActivity().getIntent().getExtras();
+            idStabile = bundle.get("idStabile").toString(); // prende l'identificativo per fare il retrieve delle info
+
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString("idStabile", idStabile);
+            editor.apply();
+
+        } else {
+
+            idStabile = sharedPrefs.getString("idStabile", "").toString();
+
+            bundle = new Bundle();
+            bundle.putString("uidFornitore", idStabile);
+
+        }
     }
 
     @Override
@@ -100,19 +124,12 @@ public class BachecaAvvisi extends Fragment {
 
 
         //lettura uid condomino -->  codice fiscale stabile, uid amministratore
-        uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
-        firebaseDB = FirebaseDB.getCondomini().child(uidCondomino);
+        uidCondomino = idStabile;
+        //firebaseAuth.getCurrentUser().getUid().toString();
+        firebaseDB = FirebaseDB.getAvvisi();
 
-
-
-
-        firebaseDB.child("stabile").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //ricavo codicefiscale stabile
-                stabile = dataSnapshot.getValue().toString();
                 Query prova;
-                prova = FirebaseDB.getAvvisi().orderByChild("stabile").equalTo(stabile);
+                prova = FirebaseDB.getAvvisi().orderByChild("stabile").equalTo(idStabile);
 
                 prova.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -172,11 +189,5 @@ public class BachecaAvvisi extends Fragment {
 
             }
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
 
-            }
-        });
-
-    }
 }

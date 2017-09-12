@@ -11,9 +11,9 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.gambino_serra.condomanager_condomino.Model.Entity.TicketIntervento;
-import com.gambino_serra.condomanager_condomino.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_condomino.tesi.R;
+import com.gambino_serra.condomanager_amministratore.Model.Entity.TicketIntervento;
+import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
+import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -197,7 +197,7 @@ public class DettaglioIntervento extends AppCompatActivity {
                         ticketInterventoMap.get("foto").toString(), // TODO: cambia DB
                         ticketInterventoMap2.get("nome_azienda").toString(),
                         ticketInterventoMap2.get("nome").toString(),
-                        ticketInterventoMap2.get("categoria").toString()
+                        ticketInterventoMap2.get("categoria").toString(),"ciao","ciao"
                 );
 
 
@@ -207,9 +207,9 @@ public class DettaglioIntervento extends AppCompatActivity {
                 mUltimoAggiornamento.setText(ticketIntervento.getAggiornamentoCondomini());
                 mDescrizione.setText(ticketIntervento.getDescrizioneCondomini());
                 mStato.setText(ticketIntervento.getStato());
-                mNomeFornitore.setText(ticketIntervento.getNomeFornitore());
-                mAziendaFornitore.setText(ticketIntervento.getNomeAziendaFornitore());
-                mCategoria.setText(ticketIntervento.getCategoriaFornitore());
+                mNomeFornitore.setText("ciao");
+                mAziendaFornitore.setText("ciao");
+                mCategoria.setText("ciao");
 
                 if ( ! "-".equals(ticketIntervento.getFoto())  ) {
                     Picasso.with(getApplicationContext()).load( ticketIntervento.getFoto() ).fit().centerCrop().into(mFoto) ;

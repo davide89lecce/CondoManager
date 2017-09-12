@@ -26,7 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gambino_serra.condomanager_condomino.tesi.R;
+import com.gambino_serra.condomanager_amministratore.tesi.R;
 
 public class BachecaSondaggi extends Fragment {
     public static BachecaSondaggi newInstance() {

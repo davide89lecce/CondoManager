@@ -31,6 +31,7 @@
     <string name="title_details_richiesta">Dettagli richiesta</string>
     <string name="title_mappa_interventi_in_corso">Mappa interventi in corso</string>
     <string name="title_mappa_stabili">Mappa stabili</string>
+    <string name="title_sezione_stabili">Stabile</string>
 
     <!-- login -->
     <string name="enter_mail"> Inserisci e-mail</string>
