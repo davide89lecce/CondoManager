@@ -41,6 +41,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.gambino_serra.condomanager_amministratore.View.Home.BachecaStabili.MappaStabili"
+            android:label="@string/title_mappa_stabili"
+            android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.gambino_serra.condomanager_amministratore.View.Home.InterventiInCorso.BachecaInterventiInCorso.MappaInterventiInCorso"
             android:label="@string/title_mappa_interventi_in_corso"
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
