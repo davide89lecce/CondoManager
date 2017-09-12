@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_item1"
-        android:icon="@mipmap/ic_launcher"
-        android:title="@string/bottom_sheet_behavior"/>
+        android:icon="@drawable/info"
+        android:title="@string/tab_richieste_intervento" />
     <item
         android:id="@+id/action_item2"
-        android:icon="@mipmap/ic_launcher"
-        android:title="@string/bottom_sheet_behavior"/>
+        android:icon="@drawable/logo_oggetto"
+        android:title="@string/tab_interventi_in_corso" />
     <item
         android:id="@+id/action_item3"
-        android:icon="@mipmap/ic_launcher"
-        android:title="@string/app_name"/>
+        android:icon="@drawable/completato"
+        android:title="@string/tab_interventi_completati" />
 </menu>
