@@ -51,12 +51,12 @@
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gambino_serra.condomanager_amministratore.View.Home.RichiesteIntervento.DettaglioRichiestaIntervento"
+            android:name="com.gambino_serra.condomanager_amministratore.View.Home.BachecaCondomini.DettaglioRichiestaIntervento"
             android:label="@string/title_details_richiesta"
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gambino_serra.condomanager_amministratore.View.Home.InterventiCompletati.InterventoCompletato.InterventoCompletato"
+            android:name="com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.InterventoCompletato.InterventoCompletato"
             android:label="@string/title_details_intervento"
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />

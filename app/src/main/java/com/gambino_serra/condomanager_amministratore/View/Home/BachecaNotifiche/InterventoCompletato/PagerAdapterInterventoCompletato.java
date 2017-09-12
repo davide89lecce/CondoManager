@@ -1,10 +1,10 @@
-package com.gambino_serra.condomanager_amministratore.View.Home.InterventiCompletati.InterventoCompletato;
+package com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.InterventoCompletato;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.gambino_serra.condomanager_amministratore.View.Home.InterventiCompletati.InterventoCompletato.RapportiIntervento.RapportiInterventoCompletato;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.InterventoCompletato.RapportiIntervento.RapportiInterventoCompletato;
 
 public class PagerAdapterInterventoCompletato extends FragmentStatePagerAdapter {
     int mNumOfTabs;

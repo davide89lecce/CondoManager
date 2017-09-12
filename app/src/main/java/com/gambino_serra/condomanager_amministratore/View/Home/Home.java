@@ -12,9 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gambino_serra.condomanager_amministratore.View.Home.InterventiCompletati.BachecaInterventiCompletati.BachecaInterventiCompletati;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.BachecaInterventiCompletati.BachecaInterventiCompletati;
 import com.gambino_serra.condomanager_amministratore.View.Home.InterventiInCorso.BachecaInterventiInCorso.BachecaInterventiInCorso;
-import com.gambino_serra.condomanager_amministratore.View.Home.RichiesteIntervento.BachecaRichiesteIntervento;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaCondomini.BachecaRichiesteIntervento;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 
 public class Home extends Fragment {

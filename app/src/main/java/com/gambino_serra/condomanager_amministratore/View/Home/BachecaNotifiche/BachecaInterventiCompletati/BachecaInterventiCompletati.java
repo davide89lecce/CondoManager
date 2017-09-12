@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_amministratore.View.Home.RichiesteIntervento;
+package com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.BachecaInterventiCompletati;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,19 +19,23 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.CardTicketIntervento;
+import com.gambino_serra.condomanager_amministratore.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.InterventoCompletato.InterventoCompletato;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BachecaRichiesteIntervento extends Fragment {
+public class BachecaInterventiCompletati extends Fragment{
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private ArrayList<CardTicketIntervento> data;
+    private ArrayList<TicketIntervento> data;
     public static View.OnClickListener myOnClickListener;
     Context context;
 
@@ -40,8 +44,8 @@ public class BachecaRichiesteIntervento extends Fragment {
     Map<String, Object> ticketInterventoMap;
     ArrayList<CardTicketIntervento> interventi;
 
-    public static BachecaRichiesteIntervento newInstance() {
-        BachecaRichiesteIntervento fragment = new BachecaRichiesteIntervento();
+    public static BachecaInterventiCompletati newInstance() {
+        BachecaInterventiCompletati fragment = new BachecaInterventiCompletati();
         return fragment;
         }
 
@@ -52,7 +56,7 @@ public class BachecaRichiesteIntervento extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_richieste_intervento, container, false);
+        return inflater.inflate(R.layout.tab_interventi_completati, container, false);
         }
 
     @Override
@@ -61,7 +65,7 @@ public class BachecaRichiesteIntervento extends Fragment {
 
         context = getContext();
         firebaseAuth = FirebaseAuth.getInstance();
-        data = new ArrayList<CardTicketIntervento>();
+        data = new ArrayList<TicketIntervento>();
         ticketInterventoMap = new HashMap<String,Object>();
         interventi = new ArrayList<CardTicketIntervento>();
 
@@ -74,15 +78,17 @@ public class BachecaRichiesteIntervento extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        //lettura uid condomino -->  codice fiscale stabile, uid amministratore
         uidFornitore = firebaseAuth.getCurrentUser().getUid().toString();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         Query query;
         query = FirebaseDB.getInterventi().orderByChild("fornitore").equalTo(uidFornitore);
 
-
-        // la query seleziona solo gli interventi con un determinato fornitore
-        //il listener lavora sui figli della query, ovvero su titti gli interventi recuperati
+        // la query seleziona solo gli interventi con un determinato fornitore il listener lavora sui figli della query, ovvero su titti gli interventi recuperati
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
@@ -91,16 +97,22 @@ public class BachecaRichiesteIntervento extends Fragment {
                 ticketInterventoMap = new HashMap<String,Object>();
                 ticketInterventoMap.put("id", dataSnapshot.getKey()); //primo campo del MAP
 
-                // per ognuno dei figli presenti nello snapshot, ovvero per tutti i figli di un singolo nodo Interv
-                // recuperiamo i dati per inserirli nel MAP
+                // per ognuno dei figli presenti nello snapshot, ovvero per tutti i figli di un singolo nodo Interv recuperiamo i dati per inserirli nel MAP
                 for ( DataSnapshot child : dataSnapshot.getChildren() ) {
                     ticketInterventoMap.put(child.getKey(), child.getValue());
                     }
+
                 recuperaDatiStabile (ticketInterventoMap);
-                }
+            }
 
             @Override
-            public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) { }
+            public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+                for( DataSnapshot child : dataSnapshot.getChildren() ) {
+                    if ("stato".equals(child.getKey().toString())) {
+                        BachecaInterventiCompletati.newInstance();
+                    }
+                }
+            }
 
             @Override
             public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) { }
@@ -124,7 +136,7 @@ public class BachecaRichiesteIntervento extends Fragment {
         @Override
         public void onClick(View v) {
             detailsIntervento(v);
-        }
+            }
 
         private void detailsIntervento(View v) {
 
@@ -136,13 +148,12 @@ public class BachecaRichiesteIntervento extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("idIntervento", selectedName);
 
-            Intent intent = new Intent(context, DettaglioRichiestaIntervento.class);
+            Intent intent = new Intent(context, InterventoCompletato.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             }
     }
-
 
     public void recuperaDatiStabile(final Map<String, Object> ticketInterventoMap) {
 
@@ -177,15 +188,22 @@ public class BachecaRichiesteIntervento extends Fragment {
                             ticketInterventoMap.get("data_ultimo_aggiornamento").toString()
                             );
 
-                    if (ticketIntervento.getStato().equals("in attesa")) {
+                    if (ticketIntervento.getStato().equals("completato")) {
                         // inserisce l'oggetto ticket nell'array interventi
                         interventi.add(ticketIntervento);
                         }
 
-                    // Utilizziamo l'adapter per popolare la recycler view
-                    adapter = new AdapterRichiesteIntervento(interventi);
-                    recyclerView.setAdapter(adapter);
+                    // Sorting interventi per idIntervento dall'ultimo al primo
+                    Collections.sort(interventi, new Comparator<CardTicketIntervento>() {
+                        @Override
+                        public int compare(CardTicketIntervento intervento, CardTicketIntervento intervento2) {
+                            return  intervento2.getIdTicketIntervento().compareTo(intervento.getIdTicketIntervento());
+                            }
+                        });
 
+                    // Utilizziamo l'adapter per popolare la recycler view
+                    adapter = new AdapterInterventiCompletati(interventi);
+                    recyclerView.setAdapter(adapter);
                 }
                 catch (NullPointerException e) {
                     Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto " + e.toString(), Toast.LENGTH_LONG).show();
@@ -199,7 +217,7 @@ public class BachecaRichiesteIntervento extends Fragment {
             public void onChildRemoved(DataSnapshot dataSnapshot) { }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {  }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) { }

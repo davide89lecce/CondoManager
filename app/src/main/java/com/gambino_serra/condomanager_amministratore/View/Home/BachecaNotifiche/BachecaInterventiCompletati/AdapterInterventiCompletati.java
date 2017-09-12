@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_amministratore.View.Home.RichiesteIntervento;
+package com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.BachecaInterventiCompletati;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,59 +11,59 @@ import com.gambino_serra.condomanager_amministratore.tesi.R;
 
 import java.util.ArrayList;
 
-public class AdapterRichiesteIntervento extends RecyclerView.Adapter<AdapterRichiesteIntervento.MyViewHolder> {
+public class AdapterInterventiCompletati extends RecyclerView.Adapter<AdapterInterventiCompletati.MyViewHolder> {
 
     private ArrayList<CardTicketIntervento> dataset;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView TdataTicket;
+        TextView TdataUltimoAggiornamento;
         TextView Toggetto;
         TextView Tstabile;
-        TextView Tindirizzo;
         TextView IdTicket;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            this.Tstabile = (TextView) itemView.findViewById(R.id.D_Condominio);
-            this.Tindirizzo = (TextView) itemView.findViewById(R.id.D_Indirizzo);
-            this.Toggetto = (TextView) itemView.findViewById(R.id.D_Oggetto);
             this.TdataTicket = (TextView) itemView.findViewById(R.id.D_Data);
+            this.TdataUltimoAggiornamento = (TextView) itemView.findViewById(R.id.D_UltimoRapporto);
+            this.Tstabile = (TextView) itemView.findViewById(R.id.D_Condominio);
+            this.Toggetto = (TextView) itemView.findViewById(R.id.D_Oggetto);
             this.IdTicket = (TextView) itemView.findViewById(R.id.D_IDIntervento);
             }
     }
 
-    public AdapterRichiesteIntervento(ArrayList<CardTicketIntervento> dataset) {
+    public AdapterInterventiCompletati(ArrayList<CardTicketIntervento> dataset) {
         this.dataset = dataset;
         }
 
     @Override
-    public AdapterRichiesteIntervento.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_richiesta_intervento, parent, false);
+    public AdapterInterventiCompletati.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_intervento_completato, parent, false);
 
         //Setta l'onclick sulla recycler view presente nella classe Interventi
-        view.setOnClickListener(BachecaRichiesteIntervento.myOnClickListener);
+        view.setOnClickListener(BachecaInterventiCompletati.myOnClickListener);
 
-        AdapterRichiesteIntervento.MyViewHolder myViewHolder = new AdapterRichiesteIntervento.MyViewHolder(view);
+        AdapterInterventiCompletati.MyViewHolder myViewHolder = new AdapterInterventiCompletati.MyViewHolder(view);
         return myViewHolder;
-    }
+        }
 
     @Override
-    public void onBindViewHolder(final AdapterRichiesteIntervento.MyViewHolder holder, final int listPosition) {
+    public void onBindViewHolder(final AdapterInterventiCompletati.MyViewHolder holder, final int listPosition) {
 
-        TextView Tstabile = holder.Tstabile;
-        TextView Tindirizzo = holder.Tindirizzo;
-        TextView Toggetto = holder.Toggetto;
         TextView TdataTicket = holder.TdataTicket;
+        TextView TdataUltimoAggiornamento = holder.TdataUltimoAggiornamento;
+        TextView Tstabile = holder.Tstabile;
+        TextView Toggetto = holder.Toggetto;
         TextView IdTicket = holder.IdTicket;
 
-        Tstabile.setText(dataset.get(listPosition).getNomeStabile());
-        Tindirizzo.setText(dataset.get(listPosition).getIndirizzoStabile());
-        Toggetto.setText(dataset.get(listPosition).getOggetto());
         TdataTicket.setText(dataset.get(listPosition).getDataTicket());
+        TdataUltimoAggiornamento.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
+        Tstabile.setText(dataset.get(listPosition).getNomeStabile());
+        Toggetto.setText(dataset.get(listPosition).getOggetto());
         IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
-    }
+        }
 
     @Override
     public int getItemCount() {

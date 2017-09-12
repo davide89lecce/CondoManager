@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_item1"
-        android:icon="@drawable/info"
-        android:title="@string/tab_richieste_intervento" />
+        android:icon="@drawable/logo_cond"
+        android:title="@string/tab_bacheca_condomini" />
     <item
         android:id="@+id/action_item2"
-        android:icon="@drawable/logo_oggetto"
-        android:title="@string/tab_interventi_in_corso" />
+        android:icon="@drawable/logo_mondo"
+        android:title="@string/tab_bacheca_notifiche" />
     <item
         android:id="@+id/action_item3"
-        android:icon="@drawable/completato"
-        android:title="@string/tab_interventi_completati" />
+        android:icon="@drawable/logo_fornitore"
+        android:title="@string/tab_bacheca_fornitori" />
 </menu>

@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_amministratore.View.Home.RichiesteIntervento;
+package com.gambino_serra.condomanager_amministratore.View.Home.BachecaCondomini;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

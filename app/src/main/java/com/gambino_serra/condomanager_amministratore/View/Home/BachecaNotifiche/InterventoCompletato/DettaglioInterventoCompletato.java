@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_amministratore.View.Home.InterventiCompletati.InterventoCompletato;
+package com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.InterventoCompletato;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

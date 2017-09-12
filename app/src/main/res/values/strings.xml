@@ -17,9 +17,9 @@
     </string-array>
 
     <!--Navigation Bar Home-->
-    <string name="tab_richieste_intervento">Richieste d\'intervento</string>
-    <string name="tab_interventi_in_corso">Interventi in corso</string>
-    <string name="tab_interventi_completati">Interventi completati</string>
+    <string name="tab_bacheca_notifiche">Notifiche</string>
+    <string name="tab_bacheca_condomini">Lista Condomini</string>
+    <string name="tab_bacheca_fornitori">Rubrica Fornitori</string>
     <string name="logout">Logout</string>
 
 
