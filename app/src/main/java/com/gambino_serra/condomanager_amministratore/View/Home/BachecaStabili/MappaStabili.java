@@ -369,69 +369,56 @@ public class MappaStabili extends FragmentActivity implements
                             stabileMap.get("id").toString(),
                             stabileMap.get("nome").toString(),
                             stabileMap.get("indirizzo").toString()
-                    );
+                        );
 
-                        // inserisce l'oggetto stabile nell'array stabili
-                        stabili.add(listStabile);
+                    // inserisce l'oggetto stabile nell'array stabili
+                    stabili.add(listStabile);
 
-                        //codice latitudine longitudine
-                        LatLng ltlnHelpers;
-                        ltlnHelpers = new LatLng(Double.parseDouble(markerIntervento.getLatitudine()), Double.parseDouble(markerIntervento.getLongitudine()));
+                    //codice latitudine longitudine
+                    LatLng ltlnHelpers;
+                    ltlnHelpers = new LatLng(Double.parseDouble(markerIntervento.getLatitudine()), Double.parseDouble(markerIntervento.getLongitudine()));
 
-                        //Aggiunge il marker con il colore in base alla priorità
-                        if(markerIntervento.getPriorità().equals("1")) {
+                    //Aggiunge il marker con il colore in base alla priorità
+                    if(markerIntervento.getPriorità().equals("1")) {
                             map.addMarker(new MarkerOptions()
                                     .position(ltlnHelpers)
                                     .title(markerIntervento.getNomeStabile())
                                     .snippet(markerIntervento.getOggetto().toString())
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                        }else if(markerIntervento.getPriorità().equals("2")){
+                    }else if(markerIntervento.getPriorità().equals("2")){
                             map.addMarker(new MarkerOptions()
                                     .position(ltlnHelpers)
                                     .title(markerIntervento.getNomeStabile())
                                     .snippet(markerIntervento.getOggetto().toString())
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-                        }else if(markerIntervento.getPriorità().equals("3")){
+                    }else if(markerIntervento.getPriorità().equals("3")){
                             map.addMarker(new MarkerOptions()
                                     .position(ltlnHelpers)
                                     .title(markerIntervento.getNomeStabile())
                                     .snippet(markerIntervento.getOggetto().toString())
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                         }
-                        //Setta l'onclick sul marker e intent a InterventoInCorso
-                        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                            @Override
-                            public void onInfoWindowClick(Marker arg0) {
-                                for (final MarkerIntervento intervento : interventi) {
-                                    if ((intervento.getNomeStabile()).equals(arg0.getTitle().toString())) {
-                                        Intent intent = new Intent(getApplicationContext(), InterventoInCorso.class);
-                                        bundle.putString("idIntervento", intervento.getIdTicketIntervento());
-                                        intent.putExtras(bundle);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        getApplicationContext().startActivity(intent);
-                                    }
+                    //Setta l'onclick sul marker e intent a InterventoInCorso
+                    map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker arg0) {
+                            for (final MarkerIntervento intervento : interventi) {
+                                if ((intervento.getNomeStabile()).equals(arg0.getTitle().toString())) {
+                                    Intent intent = new Intent(getApplicationContext(), InterventoInCorso.class);
+                                    bundle.putString("idIntervento", intervento.getIdTicketIntervento());
+                                    intent.putExtras(bundle);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    getApplicationContext().startActivity(intent);
                                 }
                             }
-                        });
-                    }
-
+                        }
+                    });
                 } catch (NullPointerException e) {
                     Toast.makeText(getApplicationContext(), "Non riesco ad aprire l'oggetto " + e.toString(), Toast.LENGTH_LONG).show();
                 }
-            }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) { }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) { }
-        });
     }
+
+
 
     /**
      * Il metodo gestisce la comunicazione, tramite Dialog, degli errori che possono verificarsi.

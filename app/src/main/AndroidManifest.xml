@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gambino_serra.condomanager_amministratore.tesi">
 
     <uses-permission android:name="com.damico.gianluca.sei.kiuapp.permission.MAPS_RECEIVE" />
@@ -26,7 +25,6 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -79,12 +77,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.gambino_serra.condomanager_amministratore.View.Home.InterventiInCorso.InterventoInCorso.RapportiIntervento.InserimentoRapportoIntervento"></activity>
+        <activity android:name="com.gambino_serra.condomanager_amministratore.View.Home.InterventiInCorso.InterventoInCorso.RapportiIntervento.InserimentoRapportoIntervento" />
+        <activity android:name="com.gambino_serra.condomanager_amministratore.View.Stabile.SezioneStabile"></activity>
     </application>
 
 </manifest>

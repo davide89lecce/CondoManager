@@ -21,6 +21,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.ListStabile;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
+import com.gambino_serra.condomanager_amministratore.View.Stabile.SezioneStabile;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -164,7 +165,7 @@ public class BachecaStabili extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("idStabile", selectedName);
 
-            Intent intent = new Intent(context, DettaglioStabile.class);
+            Intent intent = new Intent(context, SezioneStabile.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
