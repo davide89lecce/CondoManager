@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.BachecaInterventiCompletati.BachecaInterventiCompletati;
 import com.gambino_serra.condomanager_amministratore.View.Home.InterventiInCorso.BachecaInterventiInCorso.BachecaInterventiInCorso;
-import com.gambino_serra.condomanager_amministratore.View.Home.BachecaCondomini.BachecaRichiesteIntervento;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaStabili.BachecaStabili;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 
 public class Home extends Fragment {
@@ -69,7 +69,7 @@ public class Home extends Fragment {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = BachecaRichiesteIntervento.newInstance();
+                                selectedFragment = BachecaStabili.newInstance();
                                 bottomNavigationView.getMenu().getItem(0).setChecked(true);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(false);

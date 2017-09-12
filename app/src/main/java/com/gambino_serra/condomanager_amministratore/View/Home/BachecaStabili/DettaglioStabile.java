@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_amministratore.View.Home.BachecaCondomini;
+package com.gambino_serra.condomanager_amministratore.View.Home.BachecaStabili;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,7 +31,7 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DettaglioRichiestaIntervento extends AppCompatActivity {
+public class DettaglioStabile extends AppCompatActivity {
     private static final String MY_PREFERENCES = "preferences";
     private static final String LOGGED_USER = "username";
 

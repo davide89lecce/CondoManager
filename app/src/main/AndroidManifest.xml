@@ -51,7 +51,7 @@
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gambino_serra.condomanager_amministratore.View.Home.BachecaCondomini.DettaglioRichiestaIntervento"
+            android:name="com.gambino_serra.condomanager_amministratore.View.Home.BachecaStabili.DettaglioStabile"
             android:label="@string/title_details_richiesta"
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
