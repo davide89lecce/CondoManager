@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/backgroundSegnalazione">
+    android:background="@color/background">
 
 
     <ScrollView
@@ -22,7 +22,7 @@
             android:id="@+id/cardViewA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/color_white"
+            app:cardBackgroundColor="@color/colorWhite"
             app:cardCornerRadius="3dp"
             app:cardElevation="3dp"
             app:cardUseCompatPadding="true"
@@ -552,7 +552,7 @@
         android:id="@+id/btnArchivia"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@color/primarySegnalazione"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -570,7 +570,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:src="@drawable/archivio"
             android:textAlignment="center"
-            android:tint="@color/color_white"
+            android:tint="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/appCompatTextView"
             app:layout_constraintTop_toTopOf="parent"
@@ -585,7 +585,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text=" ARCHIVIA INTERVENTO"
             android:textAlignment="center"
-            android:textColor="@color/color_white"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

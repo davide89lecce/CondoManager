@@ -42,7 +42,7 @@ public class DialogConfermaRifiutaIntervento extends DialogFragment {
         title.setText("RIFIUTO RICHIESTA D'INTERVENTO");
         title.setGravity(Gravity.CENTER);
         title.setTextSize(30);
-        title.setBackgroundResource(R.color.primarySegnalazione);
+        title.setBackgroundResource(R.color.colorPrimary);
         title.setTextColor(Color.WHITE);
         builder.setCustomTitle(title);
 
