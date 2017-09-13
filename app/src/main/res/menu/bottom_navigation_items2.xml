@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/action_item0"
+        android:icon="@drawable/info_cond_icon"
+        android:title="AAA"/>
+    <item
         android:id="@+id/action_item1"
         android:icon="@drawable/logo_descriz"
         android:title="AAA"/>

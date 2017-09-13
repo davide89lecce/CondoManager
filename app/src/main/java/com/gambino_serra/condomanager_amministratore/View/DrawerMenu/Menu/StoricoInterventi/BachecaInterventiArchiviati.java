@@ -173,11 +173,11 @@ public class BachecaInterventiArchiviati extends Fragment{
                     CardTicketIntervento ticketIntervento = new CardTicketIntervento(
                             ticketInterventoMap.get("id").toString(),
                             ticketInterventoMap.get("stabile").toString(),
-                            ticketInterventoMap2.get("nome").toString(),
-                            ticketInterventoMap2.get("indirizzo").toString(),
                             ticketInterventoMap.get("oggetto").toString(),
                             ticketInterventoMap.get("priorità").toString(),
                             ticketInterventoMap.get("stato").toString(),
+                            ticketInterventoMap.get("descrizione_condomini").toString(),
+                            ticketInterventoMap.get("aggiornamento_condomini").toString(),
                             ticketInterventoMap.get("data_ticket").toString(),
                             ticketInterventoMap.get("data_ultimo_aggiornamento").toString()
                     );

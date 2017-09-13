@@ -159,7 +159,7 @@ public class BachecaStabili extends Fragment {
 
             int selectedItemPosition = recyclerView.getChildPosition(v);
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
-            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.D_IDStabile);
+            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.Hidden_ID);
             String selectedName = (String) textViewName.getText();
 
             Bundle bundle = new Bundle();

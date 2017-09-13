@@ -62,8 +62,6 @@ public class BachecaAvvisi extends Fragment {
 
     private Bundle bundle;
 
-    private String uidCondomino;
-    private String stabile;
     Map<String, Object> avvisoMap;
     ArrayList<Avviso> avvisi;
 
@@ -123,71 +121,69 @@ public class BachecaAvvisi extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        //lettura uid condomino -->  codice fiscale stabile, uid amministratore
-        uidCondomino = idStabile;
-        //firebaseAuth.getCurrentUser().getUid().toString();
+
+        // Riferimento alla tabella contenente tutti gli Avvisi
         firebaseDB = FirebaseDB.getAvvisi();
 
-                Query prova;
-                prova = FirebaseDB.getAvvisi().orderByChild("stabile").equalTo(idStabile);
 
-                prova.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        // Query per identificare tutti gli avvisi appartenenti allo stabile desiderato
+         Query prova;
+         prova = FirebaseDB.getAvvisi().orderByChild("stabile").equalTo(idStabile);
 
-                        avvisoMap = new HashMap<String,Object>();
-                        avvisoMap.put("id", dataSnapshot.getKey());
+         prova.addChildEventListener(new ChildEventListener() {
+              @Override
+              public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                        for ( DataSnapshot child : dataSnapshot.getChildren() ) {
-                            avvisoMap.put(child.getKey(), child.getValue());
+                  // Creo un MAP per immagazzinare i dati che ricevo da Firebase
+                  avvisoMap = new HashMap<String,Object>();
+                  avvisoMap.put("id", dataSnapshot.getKey());
+
+                  for ( DataSnapshot child : dataSnapshot.getChildren() ) {
+                       avvisoMap.put(child.getKey(), child.getValue());
                         }
 
-                        try{
+                  try{
 
-                            Avviso avviso = new Avviso(
-                                    avvisoMap.get("id").toString(),
-                                    avvisoMap.get("amministratore").toString(),
-                                    avvisoMap.get("stabile").toString(),
-                                    avvisoMap.get("oggetto").toString(),
-                                    avvisoMap.get("descrizione").toString(),
-                                    avvisoMap.get("scadenza").toString()
-                            );
+                      // Creo un oggetto Avviso avvalorandolo con i dati raccolti
+                      Avviso avviso = new Avviso(
+                            avvisoMap.get("id").toString(),
+                            avvisoMap.get("amministratore").toString(),
+                            avvisoMap.get("stabile").toString(),
+                            avvisoMap.get("oggetto").toString(),
+                            avvisoMap.get("descrizione").toString(),
+                            avvisoMap.get("scadenza").toString()
+                        );
 
 
-                            // TODO : if ( avvisoMap.get("scadenza").toDate  <  oggy  )
-                            avvisi.add(avviso);
-                        }
-                        catch (NullPointerException e) {
+                            // TODO : if ( avvisoMap.get("scadenza").toDate  <  oggi  )
+
+                      // inserisco l'Avviso creato nel'ArrayList di Avvisi che verrà visualizzato
+                      avvisi.add(avviso);
+                  }
+                  catch (NullPointerException e) {
                             Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
-                        }
+                  }
 
+                  // Inserisco la struttura contenente gli avvisi nell'adapter per visualizzarla
+                  adapter = new AdapterBachecaAvvisi(avvisi);
+                  recyclerView.setAdapter(adapter);
+              }
 
-                        adapter = new AdapterBachecaAvvisi(avvisi);
-                        recyclerView.setAdapter(adapter);
-                    }
+             @Override
+             public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+             @Override
+             public void onChildRemoved(DataSnapshot dataSnapshot) { }
 
-                    }
+             @Override
+             public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
 
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+             @Override
+             public void onCancelled(FirebaseError firebaseError) { }
 
-                    }
+         });
 
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-
-                    }
-                });
-
-            }
+    }
 
 
 }

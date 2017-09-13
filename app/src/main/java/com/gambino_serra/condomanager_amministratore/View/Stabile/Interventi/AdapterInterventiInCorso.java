@@ -71,7 +71,14 @@ public class AdapterInterventiInCorso extends RecyclerView.Adapter<AdapterInterv
         mOggetto.setText(dataset.get(listPosition).getOggetto());
         //mStato.setText(dataset.get(listPosition).getStato());
         mDataAgg.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
-        mAgg.setText(dataset.get(listPosition).getAggiornamentoCondomini());
+
+        // Se non ci sono aggiornamenti, viene visualizzata in primo piano la descriione iniziale
+        if( dataset.get(listPosition).getAggiornamentoCondomini().equals("-") )
+            mAgg.setText(dataset.get(listPosition).getDescrizioneCondomini());
+        else
+            mAgg.setText(dataset.get(listPosition).getAggiornamentoCondomini());
+
+
         IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
         //textViewSegnalazione.setText( dataset.get(listPosition).getOggetto());
 

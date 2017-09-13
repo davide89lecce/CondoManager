@@ -6,32 +6,32 @@ public class CardTicketIntervento implements Comparable<CardTicketIntervento> {
 
     private String idTicketIntervento;
     private String idStabile;
-    private String nomeStabile;
-    private String indirizzoStabile;
     private String oggetto;
     private String priorità;
     private String stato;
+    private String descrizioneCondomini;
+    private String aggiornamentoCondomini;
     private String dataTicket;
     private String dataUltimoAggiornamento;
 
     public CardTicketIntervento(String idTicketIntervento,
                                 String idStabile,
-                                String nomeStabile,
-                                String indirizzoStabile,
                                 String oggetto,
                                 String priorità,
                                 String stato,
+                                String descrizioneCondomini,
+                                String aggiornamentoCondomini,
                                 String dataTicket,
                                 String dataUltimoAggiornamento) {
 
 
         this.idTicketIntervento = idTicketIntervento;
         this.idStabile = idStabile;
-        this.nomeStabile = nomeStabile;
-        this.indirizzoStabile = indirizzoStabile;
         this.oggetto = oggetto;
         this.priorità = priorità;
         this.stato = stato;
+        this.descrizioneCondomini = descrizioneCondomini;
+        this.aggiornamentoCondomini = aggiornamentoCondomini;
         this.dataTicket = dataTicket;
         this.dataUltimoAggiornamento = dataUltimoAggiornamento;
     }
@@ -50,22 +50,6 @@ public class CardTicketIntervento implements Comparable<CardTicketIntervento> {
 
     public void setIdStabile(String idStabile) {
         this.idStabile = idStabile;
-    }
-
-    public String getNomeStabile() {
-        return nomeStabile;
-    }
-
-    public void setNomeStabile(String nomeStabile) {
-        this.nomeStabile = nomeStabile;
-    }
-
-    public String getIndirizzoStabile() {
-        return indirizzoStabile;
-    }
-
-    public void setIndirizzoStabile(String indirizzoStabile) {
-        this.indirizzoStabile = indirizzoStabile;
     }
 
     public String getOggetto() {
@@ -92,6 +76,22 @@ public class CardTicketIntervento implements Comparable<CardTicketIntervento> {
         this.stato = stato;
     }
 
+    public String getDescrizioneCondomini() {
+        return descrizioneCondomini;
+    }
+
+    public void setDescrizioneCondomini(String descrizioneCondomini) {
+        this.descrizioneCondomini = descrizioneCondomini;
+    }
+
+    public String getAggiornamentoCondomini() {
+        return aggiornamentoCondomini;
+    }
+
+    public void setAggiornamentoCondomini(String aggiornamentoCondomini) {
+        this.aggiornamentoCondomini = aggiornamentoCondomini;
+    }
+
     public String getDataTicket() {
         return dataTicket;
     }
@@ -108,6 +108,8 @@ public class CardTicketIntervento implements Comparable<CardTicketIntervento> {
         this.dataUltimoAggiornamento = dataUltimoAggiornamento;
     }
 
+
+    // Metodo per confrontare le card di intervento e dare la precedenza agli interventi con priorità più alta
     @Override
     public int compareTo(CardTicketIntervento cardTicketIntervento) {
         //write code here for compare name

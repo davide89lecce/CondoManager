@@ -30,21 +30,9 @@ public class DettaglioIntervento extends AppCompatActivity {
     private static final String LOGGED_USER = "username";
 
     String username = "";
-    String data = "";
-    String segnalazione = "";
-    String usernameCondomino = "";
-    String condominio = "";
-    String telefonoAmministratore = "";
-    String fornitore = "";
-    String stato = "";
-    String idCondominio = "";
-    String impiantoNome = "";
-    String azienda = "";
-    String condomino = "";
 
     String idTicket;
 
-    // Oggetti di Layout NUOVI
     TextView mOggetto;
     TextView mDescrizione;
     TextView mStato;

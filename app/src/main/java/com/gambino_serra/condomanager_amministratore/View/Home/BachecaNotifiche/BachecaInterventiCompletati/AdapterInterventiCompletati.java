@@ -58,11 +58,11 @@ public class AdapterInterventiCompletati extends RecyclerView.Adapter<AdapterInt
         TextView Toggetto = holder.Toggetto;
         TextView IdTicket = holder.IdTicket;
 
-        TdataTicket.setText(dataset.get(listPosition).getDataTicket());
-        TdataUltimoAggiornamento.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
-        Tstabile.setText(dataset.get(listPosition).getNomeStabile());
-        Toggetto.setText(dataset.get(listPosition).getOggetto());
-        IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
+        //TdataTicket.setText(dataset.get(listPosition).getDataTicket());
+        //TdataUltimoAggiornamento.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
+        //Tstabile.setText(dataset.get(listPosition).getNomeStabile());
+        //Toggetto.setText(dataset.get(listPosition).getOggetto());
+        //IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
         }
 
     @Override

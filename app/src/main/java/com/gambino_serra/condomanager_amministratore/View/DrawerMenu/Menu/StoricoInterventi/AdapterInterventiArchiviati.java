@@ -64,11 +64,11 @@ public class AdapterInterventiArchiviati extends RecyclerView.Adapter<AdapterInt
         TextView Toggetto = holder.Toggetto;
         TextView IdTicket = holder.IdTicket;
 
-        Tstabile.setText(dataset.get(listPosition).getNomeStabile());
-        Tdata.setText(dataset.get(listPosition).getDataTicket());
-        TdataUltimoAgg.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
-        Toggetto.setText(dataset.get(listPosition).getOggetto());
-        IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
+        //Tstabile.setText(dataset.get(listPosition).getNomeStabile());
+        //Tdata.setText(dataset.get(listPosition).getDataTicket());
+        //TdataUltimoAgg.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
+        //Toggetto.setText(dataset.get(listPosition).getOggetto());
+        //IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
     }
 
     @Override

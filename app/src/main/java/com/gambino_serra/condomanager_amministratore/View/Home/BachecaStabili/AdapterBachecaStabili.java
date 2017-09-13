@@ -26,7 +26,7 @@ public class AdapterBachecaStabili extends RecyclerView.Adapter<AdapterBachecaSt
 
             this.Tstabile = (TextView) itemView.findViewById(R.id.D_Stabile);
             this.Tindirizzo = (TextView) itemView.findViewById(R.id.D_Indirizzo);
-            this.TIdStabile = (TextView) itemView.findViewById(R.id.D_IDStabile);
+            this.TIdStabile = (TextView) itemView.findViewById(R.id.Hidden_ID);
             }
     }
 

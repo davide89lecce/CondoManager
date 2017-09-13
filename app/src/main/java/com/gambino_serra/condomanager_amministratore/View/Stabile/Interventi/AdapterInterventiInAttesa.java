@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gambino_serra.condomanager_amministratore.Model.Entity.CardTicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 
@@ -17,7 +18,7 @@ import static com.gambino_serra.condomanager_amministratore.tesi.R.id.Logo_Inter
 
 public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInterventiInAttesa.MyViewHolder> {
 
-    private ArrayList<TicketIntervento> dataset;
+    private ArrayList<CardTicketIntervento> dataset;
 
     int row;
 
@@ -42,7 +43,7 @@ public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInter
         }
     }
 
-    public AdapterInterventiInAttesa(ArrayList<TicketIntervento> dataset) {
+    public AdapterInterventiInAttesa(ArrayList<CardTicketIntervento> dataset) {
         this.dataset = dataset;
     }
 
@@ -71,7 +72,10 @@ public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInter
         mOggetto.setText(dataset.get(listPosition).getOggetto());
         //mStato.setText(dataset.get(listPosition).getStato());
         mDataAgg.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
-        mAgg.setText(dataset.get(listPosition).getAggiornamentoCondomini());
+
+        // Ci sarà soltanto una descrizione e non un aggiornamento
+        mAgg.setText(dataset.get(listPosition).getDescrizioneCondomini());
+
         IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
         //textViewSegnalazione.setText( dataset.get(listPosition).getOggetto());
 

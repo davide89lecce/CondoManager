@@ -2,6 +2,7 @@ package com.gambino_serra.condomanager_amministratore.View.Stabile.Interventi;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.gambino_serra.condomanager_amministratore.Model.Entity.CardTicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_amministratore.View.Stabile.Interventi.old.DettaglioIntervento;
@@ -50,14 +52,35 @@ public class InterventiCompletati extends Fragment{
         private DatabaseReference databaseReference;
         private FirebaseDatabase firebaseDatabase;
 
-        private String uidCondomino;
-        private String stabile;
+        private Bundle bundle;
+        private String idStabile;
+
         Map<String, Object> ticketInterventoMap;
-        ArrayList<TicketIntervento> interventi;
+        ArrayList<CardTicketIntervento> interventi;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
+            final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, getActivity().MODE_PRIVATE);
+
+            if (getActivity().getIntent().getExtras() != null) {
+
+                bundle = getActivity().getIntent().getExtras();
+                idStabile = bundle.get("idStabile").toString(); // prende l'identificativo per fare il retrieve delle info
+
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("idStabile", idStabile);
+                editor.apply();
+
+            } else {
+
+                idStabile = sharedPrefs.getString("idStabile", "").toString();
+
+                bundle = new Bundle();
+                bundle.putString("uidFornitore", idStabile);
+
+            }
         }
 
         @Override
@@ -72,7 +95,7 @@ public class InterventiCompletati extends Fragment{
             context = getContext();
             firebaseAuth = FirebaseAuth.getInstance();
             ticketInterventoMap = new HashMap<String,Object>();
-            interventi = new ArrayList<TicketIntervento>();
+            interventi = new ArrayList<CardTicketIntervento>();
 
             myOnClickListener = new MyOnClickListener(context);
 
@@ -84,100 +107,69 @@ public class InterventiCompletati extends Fragment{
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
+            // Riferimento alla tabella contenente tutti gli Interventi
+            firebaseDB = FirebaseDB.getInterventi();
 
-            //lettura uid condomino -->  codice fiscale stabile, uid amministratore
-            uidCondomino = firebaseAuth.getCurrentUser().getUid().toString();
-            firebaseDB = FirebaseDB.getCondomini().child(uidCondomino);
+            // Query per identificare tutti gli avvisi appartenenti allo stabile desiderato
+            Query prova;
+            prova = FirebaseDB.getInterventi().orderByChild("stabile").equalTo(idStabile);
 
-
-
-            firebaseDB.child("stabile").addListenerForSingleValueEvent(new ValueEventListener() {
+            prova.addChildEventListener(new ChildEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    //ricavo codicefiscale stabile
-                    stabile = dataSnapshot.getValue().toString();
-                    Query prova;
-                    prova = FirebaseDB.getInterventi().orderByChild("stabile").equalTo(stabile);
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                    prova.addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    ticketInterventoMap = new HashMap<String,Object>();
+                    ticketInterventoMap.put("id", dataSnapshot.getKey());
 
-                            ticketInterventoMap = new HashMap<String,Object>();
-                            ticketInterventoMap.put("id", dataSnapshot.getKey());
+                    for ( DataSnapshot child : dataSnapshot.getChildren() ) {
+                        ticketInterventoMap.put(child.getKey(), child.getValue());
+                    }
 
-                            for ( DataSnapshot child : dataSnapshot.getChildren() ) {
-                                ticketInterventoMap.put(child.getKey(), child.getValue());
-                            }
-
-                            try{
-
-                                TicketIntervento ticketIntervento = new TicketIntervento(
-                                        ticketInterventoMap.get("id").toString(),
-                                        ticketInterventoMap.get("amministratore").toString(),
-                                        ticketInterventoMap.get("data_ticket").toString(),
-                                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
-                                        ticketInterventoMap.get("fornitore").toString(),
-                                        ticketInterventoMap.get("messaggio_condomino").toString(),
-                                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
-                                        ticketInterventoMap.get("descrizione_condomini").toString(),
-                                        ticketInterventoMap.get("oggetto").toString(),
-                                        ticketInterventoMap.get("rapporti_intervento").toString(),
-                                        ticketInterventoMap.get("richiesta").toString(),
-                                        ticketInterventoMap.get("stabile").toString(),
-                                        ticketInterventoMap.get("stato").toString() ,
-                                        ticketInterventoMap.get("priorità").toString(),
-                                        "ciao","ciao","ciao","ciao","ciao","ciao");//TODO
+                    try{
+                        CardTicketIntervento ticketIntervento = new CardTicketIntervento(
+                                ticketInterventoMap.get("id").toString(),
+                                ticketInterventoMap.get("stabile").toString(),
+                                ticketInterventoMap.get("oggetto").toString(),
+                                ticketInterventoMap.get("priorità").toString(),
+                                ticketInterventoMap.get("stato").toString() ,
+                                ticketInterventoMap.get("descrizione_condomini").toString(),
+                                ticketInterventoMap.get("aggiornamento_condomini").toString(),
+                                ticketInterventoMap.get("data_ticket").toString(),
+                                ticketInterventoMap.get("data_ultimo_aggiornamento").toString()
+                        );
 
 
-                                if((ticketIntervento.getStato().equals("completato")) || (ticketIntervento.getStato().equals("archiviato"))) {
-                                    interventi.add(ticketIntervento);
-                                }
-                            }
-                            catch (NullPointerException e) {
-                                Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
-                            }
-
-
-                            adapter = new AdapterInterventiCompletati(interventi);
-                            recyclerView.setAdapter(adapter);
-
+                        if( (ticketIntervento.getStato().equals("completato")) || (ticketIntervento.getStato().equals("archiviato")) )
+                        {
+                            interventi.add(ticketIntervento);
                         }
 
-                        @Override
-                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    }catch (NullPointerException e) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
+                    }
 
-                        }
 
-                        @Override
-                        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                        }
-
-                        @Override
-                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError) {
-
-                        }
-                    });
+                    adapter = new AdapterInterventiInAttesa(interventi);
+                    recyclerView.setAdapter(adapter);
 
                 }
 
                 @Override
-                public void onCancelled(FirebaseError firebaseError) {
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
-                }
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) { }
+
             });
 
-
-
-
-
         }
+
 
 private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
 
@@ -199,7 +191,7 @@ private static class MyOnClickListener extends AppCompatActivity implements View
                 = recyclerView.findViewHolderForPosition(selectedItemPosition);
         TextView textViewName
                 = (TextView) viewHolder.itemView.findViewById(R.id.IDTicket);
-        String selectedName = (String) textViewName.getText();
+        String selectedName = (String) textViewName.getText();//TODO: controlla textViewName
 
         Bundle bundle = new Bundle();
         bundle.putString("idTicket", selectedName);

@@ -71,6 +71,11 @@
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.gambino_serra.condomanager_amministratore.View.Stabile.Interventi.old.DettaglioIntervento"
+            android:label="@string/title_details_intervento"
+            android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.StoricoInterventi.DettaglioInterventoArchiviato"
             android:label="@string/title_details_intervento"
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"

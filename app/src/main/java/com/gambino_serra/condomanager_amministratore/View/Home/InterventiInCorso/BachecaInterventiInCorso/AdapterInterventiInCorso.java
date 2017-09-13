@@ -70,11 +70,11 @@ public class AdapterInterventiInCorso extends RecyclerView.Adapter<AdapterInterv
         TextView IdTicket = holder.IdTicket;
 
         try {
-            Tstabile.setText(dataset.get(listPosition).getNomeStabile());
-            Tindirizzo.setText(dataset.get(listPosition).getIndirizzoStabile());
-            Toggetto.setText(dataset.get(listPosition).getOggetto());
-            TdataTicket.setText(dataset.get(listPosition).getDataTicket());
-            IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
+            //Tstabile.setText(dataset.get(listPosition).getNomeStabile());
+            //Tindirizzo.setText(dataset.get(listPosition).getIndirizzoStabile());
+            //Toggetto.setText(dataset.get(listPosition).getOggetto());
+            //TdataTicket.setText(dataset.get(listPosition).getDataTicket());
+            //IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
         }catch (NullPointerException e){
             Log.d("HEY", "Mi sono bloccato");
         }

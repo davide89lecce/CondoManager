@@ -89,23 +89,33 @@ public class SezioneStabile extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
-                            case R.id.action_item1:
+                            case R.id.action_item0:
                                 selectedFragment = BachecaSondaggi.newInstance();
                                 bottomNavigationView.getMenu().getItem(0).setChecked(true);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(3).setChecked(false);
+                                break;
+                            case R.id.action_item1:
+                                selectedFragment = BachecaSondaggi.newInstance();
+                                bottomNavigationView.getMenu().getItem(0).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(1).setChecked(true);
+                                bottomNavigationView.getMenu().getItem(2).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(3).setChecked(false);
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = BachecaAvvisi.newInstance();
                                 bottomNavigationView.getMenu().getItem(0).setChecked(false);
-                                bottomNavigationView.getMenu().getItem(1).setChecked(true);
-                                bottomNavigationView.getMenu().getItem(2).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(1).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                                bottomNavigationView.getMenu().getItem(3).setChecked(false);
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = BachecaInterventi.newInstance();
                                 bottomNavigationView.getMenu().getItem(0).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
-                                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                                bottomNavigationView.getMenu().getItem(2).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(3).setChecked(true);
                                 break;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -122,9 +132,10 @@ public class SezioneStabile extends AppCompatActivity {
         transaction.replace(R.id.frame_layout, BachecaAvvisi.newInstance());
         transaction.commit();
         //Seleziona l'item interventi in corso
-        bottomNavigationView.getMenu().getItem(0).setChecked(false);
-        bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        bottomNavigationView.getMenu().getItem(1).setChecked(false);
         bottomNavigationView.getMenu().getItem(2).setChecked(false);
+        bottomNavigationView.getMenu().getItem(3).setChecked(false);
 
 
 
