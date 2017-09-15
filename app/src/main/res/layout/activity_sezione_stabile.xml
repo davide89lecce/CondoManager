@@ -119,9 +119,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
-            android:src="@drawable/warning"
+            android:src="@drawable/penna"
             app:fab_colorNormal="@color/colorAccent"
-            fab:fab_label="Nuova segnalazione"
+            fab:fab_label="Nuovo Ticket Intervento"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -129,9 +129,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
+            android:src="@drawable/warning"
+            app:fab_colorNormal="@color/colorAccent"
+            fab:fab_label="Nuovo Avviso"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/material_design_floating_action_menu_item3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:src="@drawable/email"
             app:fab_colorNormal="@color/colorAccent"
-            fab:fab_label="Nuovo messaggio"
+            fab:fab_label="Nuovo Sondaggio"
             fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>

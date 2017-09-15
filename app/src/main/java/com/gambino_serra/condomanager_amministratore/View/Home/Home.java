@@ -1,6 +1,7 @@
 package com.gambino_serra.condomanager_amministratore.View.Home;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,8 @@ import com.gambino_serra.condomanager_amministratore.View.Home.BachecaFornitori.
 import com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.BachecaNotifiche;
 import com.gambino_serra.condomanager_amministratore.View.Home.BachecaStabili.BachecaStabili;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 public class Home extends Fragment {
 
@@ -111,6 +114,7 @@ public class Home extends Fragment {
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
         bottomNavigationView.getMenu().getItem(2).setChecked(false);
         TitoloSezione.setText("BACHECA NOTIFICHE");
+
     }
 
 

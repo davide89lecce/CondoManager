@@ -23,7 +23,6 @@ import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.Messaggio;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Avvisi.BachecaAvvisi;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,9 +34,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Antonio on 15/09/17.
- */
 
 public class BachecaMessaggi extends Fragment {
 
@@ -203,7 +199,6 @@ public class BachecaMessaggi extends Fragment {
             }
         });
     }
-
 
     private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
 

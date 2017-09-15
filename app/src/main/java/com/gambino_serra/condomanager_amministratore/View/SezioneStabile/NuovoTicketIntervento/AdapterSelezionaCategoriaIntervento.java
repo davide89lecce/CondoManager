@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_amministratore.View.Home.BachecaFornitori.AggiuntaFornitore;
+package com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoTicketIntervento;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class AdapterSelezionaCategoria extends RecyclerView.Adapter<AdapterSelezionaCategoria.MyViewHolder> {
+public class AdapterSelezionaCategoriaIntervento extends RecyclerView.Adapter<AdapterSelezionaCategoriaIntervento.MyViewHolder> {
 
-    private ArrayList<DataCategoria> dataSet;
+    private ArrayList<DataCategoriaIntevento> dataSet;
     int row;
     private Context context;
     private Activity activity;
@@ -39,7 +39,7 @@ public class AdapterSelezionaCategoria extends RecyclerView.Adapter<AdapterSelez
         }
     }
 
-    public AdapterSelezionaCategoria(ArrayList<DataCategoria> data, Context context, Activity activity) {
+    public AdapterSelezionaCategoriaIntervento(ArrayList<DataCategoriaIntevento> data, Context context, Activity activity) {
         this.dataSet = data;
         this.context = context;
         this.activity = activity;

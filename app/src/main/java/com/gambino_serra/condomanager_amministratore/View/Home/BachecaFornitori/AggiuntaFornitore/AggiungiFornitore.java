@@ -154,7 +154,7 @@ public class AggiungiFornitore extends AppCompatActivity {
 
         btnAnnulla.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent back = new Intent(getApplicationContext(), MappaFornitori.class);
+                Intent back = new Intent(getApplicationContext(), SelezionaCategoria.class);
                 back.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(back);
                 }

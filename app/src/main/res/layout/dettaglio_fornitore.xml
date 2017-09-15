@@ -22,7 +22,7 @@
         tools:layout_constraintLeft_creator="1"
         card_view:layout_constraintLeft_toLeftOf="parent"
         card_view:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         card_view:layout_constraintHorizontal_bias="0.0">
 
         <android.support.constraint.ConstraintLayout
@@ -112,7 +112,7 @@
                 android:id="@+id/cardViewFornTitolare"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 card_view:layout_constraintTop_toBottomOf="@+id/cardViewFornNome"
                 android:layout_marginRight="8dp"
                 card_view:layout_constraintRight_toRightOf="parent"
@@ -195,7 +195,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 card_view:layout_constraintTop_toBottomOf="@+id/cardViewFornTitolare"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="12dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -272,7 +272,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewFornSettore"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp">
@@ -353,7 +353,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewFornIndirizzo"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp">
@@ -432,7 +432,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewFornEmail"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 card_view:layout_constraintHorizontal_bias="0.0"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp">

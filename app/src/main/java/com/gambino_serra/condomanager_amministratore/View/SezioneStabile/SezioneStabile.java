@@ -1,5 +1,6 @@
 package com.gambino_serra.condomanager_amministratore.View.SezioneStabile;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,10 +9,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
+import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoTicketIntervento.SelezionaCategoriaIntervento;
 import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Avvisi.BachecaAvvisi;
 import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Interventi.BachecaInterventi;
 import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Messaggi.BachecaMessaggi;
@@ -31,12 +34,13 @@ public class SezioneStabile extends AppCompatActivity {
     private static final String ARG_PARAM2 = "param2";
 
     TextView TitoloSezione;
-    FloatingActionMenu materialDesignFAM;
-    FloatingActionButton floatingActionButton1, floatingActionButton2;
     FrameLayout fl;
 
     Bundle bundle;
     String idStabile;
+
+    FloatingActionMenu materialDesignFAM;
+    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
 
     private Firebase firebaseDB;
     private FirebaseUser firebaseUser;
@@ -80,6 +84,41 @@ public class SezioneStabile extends AppCompatActivity {
             bundle.putString("idStabile", idStabile);
         }
 
+        //Floating button
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
+        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
+        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
+
+        materialDesignFAM.hideMenu(true);
+        materialDesignFAM.setClosedOnTouchOutside(true);
+        materialDesignFAM.showMenu(true);
+
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SelezionaCategoriaIntervento.class);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                materialDesignFAM.close(true);
+            }
+        });
+
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+
+                materialDesignFAM.close(true);
+            }
+        });
+
+        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                materialDesignFAM.close(true);
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {

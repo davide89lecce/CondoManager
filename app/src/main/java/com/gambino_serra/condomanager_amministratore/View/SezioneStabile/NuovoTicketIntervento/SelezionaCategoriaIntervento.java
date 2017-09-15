@@ -1,4 +1,4 @@
-package com.gambino_serra.condomanager_amministratore.View.Home.BachecaFornitori.AggiuntaFornitore;
+package com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoTicketIntervento;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,19 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
-import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer;
-import com.gambino_serra.condomanager_amministratore.View.Home.BachecaFornitori.ListaFornitori;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 
 import java.util.ArrayList;
 
 
-public class SelezionaCategoria extends AppCompatActivity{
+public class SelezionaCategoriaIntervento extends AppCompatActivity{
 
     private static final String MY_PREFERENCES = "preferences";
     private static final String LOGGED_USER = "username";
@@ -30,9 +26,9 @@ public class SelezionaCategoria extends AppCompatActivity{
     private static RecyclerView recyclerView;
     public static View.OnClickListener myOnClickListener;
     private static ArrayList<Integer> removedItems;
-    private ArrayList<DataCategoria> data;
+    private ArrayList<DataCategoriaIntevento> data;
     String username;
-    DataCategoria categoria;
+    DataCategoriaIntevento categoria;
     FloatingActionButton fab;
     public int row;
     Button btnAvanti;
@@ -49,13 +45,13 @@ public class SelezionaCategoria extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.seleziona_categoria_fornitore);
+        setContentView(R.layout.seleziona_categoria_intervento);
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
         username = sharedPrefs.getString(LOGGED_USER, "").toString();
 
-        btnAvanti = (Button) findViewById(R.id.btnAvanti);
-        btnIndietro = (Button) findViewById(R.id.btnIndietro);
+          btnAvanti = (Button) findViewById(R.id.btnAvanti);
+          btnIndietro = (Button) findViewById(R.id.btnIndietro);
 
 
         removedItems = new ArrayList<Integer>();
@@ -67,35 +63,33 @@ public class SelezionaCategoria extends AppCompatActivity{
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        data = new ArrayList<DataCategoria>();
-        categoria = new DataCategoria("elettricista","lavori di tipo elettrici ");
+        data = new ArrayList<DataCategoriaIntevento>();
+        categoria = new DataCategoriaIntevento("elettricista","lavori di tipo elettrici ");
         data.add(categoria);
-        categoria = new DataCategoria("fabbro","lavori fabbrili (porte, ringhiere, cancelli)");
+        categoria = new DataCategoriaIntevento("fabbro","lavori fabbrili (porte, ringhiere, cancelli)");
         data.add(categoria);
-        categoria = new DataCategoria("idraulico","lavori idraulici (tubature, autoclave, riscaldamento)");
+        categoria = new DataCategoriaIntevento("idraulico","lavori idraulici (tubature, autoclave, riscaldamento)");
         data.add(categoria);
-        categoria = new DataCategoria("edilizia","lavori di muratura, pavimentazioni/piastrelleria, tetto/solaio, tinteggiatura");
+        categoria = new DataCategoriaIntevento("edilizia","lavori di muratura, pavimentazioni/piastrelleria, tetto/solaio, tinteggiatura");
         data.add(categoria);
-        categoria = new DataCategoria("giardiniere","lavori di giardinaggio");
+        categoria = new DataCategoriaIntevento("giardiniere","lavori di giardinaggio");
         data.add(categoria);
-        categoria = new DataCategoria("ascensorista","lavori riguardante l'ascensore");
+        categoria = new DataCategoriaIntevento("ascensorista","lavori riguardante l'ascensore");
         data.add(categoria);
-        categoria = new DataCategoria("servizi di pulizia","lavori di pulizia interna allo stabile e del cortile condominiale");
+        categoria = new DataCategoriaIntevento("servizi di pulizia","lavori di pulizia interna allo stabile e del cortile condominiale");
         data.add(categoria);
-        categoria = new DataCategoria("falegname","lavori di falegnameria");
+        categoria = new DataCategoriaIntevento("falegname","lavori di falegnameria");
         data.add(categoria);
-        categoria = new DataCategoria("vetraio","lavori di vetreria");
+        categoria = new DataCategoriaIntevento("vetraio","lavori di vetreria");
         data.add(categoria);
-        categoria = new DataCategoria("antennista","lavori riguardanti l'antenna TV");
+        categoria = new DataCategoriaIntevento("antennista","lavori riguardanti l'antenna TV");
         data.add(categoria);
-        categoria = new DataCategoria("automazione","lavori riguardanti automazione per serramenti, controllo accessi, domotica");
+        categoria = new DataCategoriaIntevento("automazione","lavori riguardanti automazione per serramenti, controllo accessi, domotica");
         data.add(categoria);
-        categoria = new DataCategoria("sicurezza","lavori riguardanti impianti antintrusione, videosorveglianza, rilevazione incendi, estintori");
-        data.add(categoria);
-        categoria = new DataCategoria("disinfestazione"," ");
+        categoria = new DataCategoriaIntevento("sicurezza","lavori riguardanti impianti antintrusione, videosorveglianza, rilevazione incendi, estintori");
         data.add(categoria);
 
-        adapter = new AdapterSelezionaCategoria(data,this,this);
+        adapter = new AdapterSelezionaCategoriaIntervento(data,this,this);
         recyclerView.setAdapter(adapter);
 
 
@@ -105,9 +99,8 @@ public class SelezionaCategoria extends AppCompatActivity{
             public void onClick(View v) {
 
                 bundle = new Bundle();
-                Log.d("ciao2",sharedPrefs.getString("categoria", ""));
                 bundle.putString("categoria", sharedPrefs.getString("categoria", ""));
-                Intent intent = new Intent(getApplicationContext(), MappaFornitori.class);
+                Intent intent = new Intent(getApplicationContext(), SelezionaFornitoreIntervento.class);
                 intent.putExtras(bundle);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -116,10 +109,12 @@ public class SelezionaCategoria extends AppCompatActivity{
         });
 
         btnIndietro.setOnClickListener(new View.OnClickListener() {
+
+            @Override
             public void onClick(View v) {
-                Intent back = new Intent(getApplicationContext(), MainDrawer.class);
-                back.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(back);
+
+                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
     }
