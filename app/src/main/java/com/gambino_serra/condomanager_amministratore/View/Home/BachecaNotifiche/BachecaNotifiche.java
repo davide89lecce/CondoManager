@@ -36,7 +36,6 @@ import com.firebase.client.Query;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.CardTicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.InterventoCompletato.InterventoCompletato;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -86,12 +85,12 @@ public class BachecaNotifiche extends Fragment {
 
         myOnClickListener = new MyOnClickListener(context);
 
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view1);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view1);
+        //recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.setLayoutManager(layoutManager);
+        //recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         uidFornitore = firebaseAuth.getCurrentUser().getUid().toString();
     }
@@ -113,18 +112,18 @@ public class BachecaNotifiche extends Fragment {
 
         private void detailsIntervento(View v) {
 
-            int selectedItemPosition = recyclerView.getChildPosition(v);
-            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
-            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.D_IDIntervento);/** Mi serve solo passare un intent */
-            String selectedName = (String) textViewName.getText();
-
-            Bundle bundle = new Bundle();
-            bundle.putString("idIntervento", selectedName); /** Mi serve solo passare un intent */
-
-            Intent intent = new Intent(context, InterventoCompletato.class);
-            intent.putExtras(bundle);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+//            int selectedItemPosition = recyclerView.getChildPosition(v);
+//            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
+//            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.D_IDIntervento);/** Mi serve solo passare un intent */
+//            String selectedName = (String) textViewName.getText();
+//
+//            Bundle bundle = new Bundle();
+//            bundle.putString("idIntervento", selectedName); /** Mi serve solo passare un intent */
+//
+//            Intent intent = new Intent(context, InterventoCompletato.class);
+//            intent.putExtras(bundle);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            context.startActivity(intent);
         }
     }
 

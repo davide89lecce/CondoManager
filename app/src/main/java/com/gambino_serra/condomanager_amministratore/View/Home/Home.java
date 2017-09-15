@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.BachecaInterventiCompletati.BachecaInterventiCompletati;
-import com.gambino_serra.condomanager_amministratore.View.Home.InterventiInCorso.BachecaInterventiInCorso.BachecaInterventiInCorso;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaFornitori.AdapterListaFornitori;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaFornitori.DettaglioFornitore;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaFornitori.ListaFornitori;
+import com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.BachecaNotifiche;
 import com.gambino_serra.condomanager_amministratore.View.Home.BachecaStabili.BachecaStabili;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 
@@ -25,6 +28,7 @@ public class Home extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    TextView TitoloSezione;
     private BottomNavigationView bottomNavigationView;
 
     private OnFragmentInteractionListener mListener;
@@ -60,6 +64,7 @@ public class Home extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+        TitoloSezione = (TextView) getActivity().findViewById(R.id.D_Sezione);
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
@@ -70,18 +75,21 @@ public class Home extends Fragment {
                         switch (item.getItemId()) {
                             case R.id.action_item1:
                                 selectedFragment = BachecaStabili.newInstance();
+                                TitoloSezione.setText("BACHECA STABILI");
                                 bottomNavigationView.getMenu().getItem(0).setChecked(true);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(false);
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = BachecaInterventiInCorso.newInstance();
+                                selectedFragment = BachecaNotifiche.newInstance();
+                                TitoloSezione.setText("BACHECA NOTIFICHE");
                                 bottomNavigationView.getMenu().getItem(0).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(true);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(false);
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = BachecaInterventiCompletati.newInstance();
+                                selectedFragment = ListaFornitori.newInstance();// TODO bacheca rubrica fornitori
+                                TitoloSezione.setText("BACHECA FORNITORI");
                                 bottomNavigationView.getMenu().getItem(0).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
@@ -89,18 +97,20 @@ public class Home extends Fragment {
                             }
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
+
                         transaction.commit();
                         return true;
                     }
                 });
 
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, BachecaInterventiInCorso.newInstance());
+        transaction.replace(R.id.frame_layout, BachecaNotifiche.newInstance());
         transaction.commit();
 
         bottomNavigationView.getMenu().getItem(0).setChecked(false);
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
         bottomNavigationView.getMenu().getItem(2).setChecked(false);
+        TitoloSezione.setText("BACHECA NOTIFICHE");
     }
 
 

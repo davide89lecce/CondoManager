@@ -9,9 +9,8 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="background">#e6f3fd</color>
+    <color name="tabColor">#ffb74d</color>
     <color name="colorSegnalaz">#ea6764</color>
     <color name="colorMess">#5977c4</color>
 
-
 </resources>
-

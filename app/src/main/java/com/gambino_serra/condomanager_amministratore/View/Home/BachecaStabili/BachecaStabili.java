@@ -21,7 +21,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.ListStabile;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_amministratore.View.Stabile.SezioneStabile;
+
+import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.SezioneStabile;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 

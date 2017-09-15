@@ -3,17 +3,21 @@
     <item
         android:id="@+id/action_item0"
         android:icon="@drawable/info_cond_icon"
-        android:title="AAA"/>
+        android:title="INFO"/>
     <item
         android:id="@+id/action_item1"
         android:icon="@drawable/logo_descriz"
-        android:title="AAA"/>
+        android:title="MESSAGGI"/>
     <item
         android:id="@+id/action_item2"
-        android:icon="@drawable/warning"
-        android:title="AAA"/>
+        android:icon="@drawable/logo_descriz"
+        android:title="SONDAGGI"/>
     <item
         android:id="@+id/action_item3"
+        android:icon="@drawable/warning"
+        android:title="AVVISI"/>
+    <item
+        android:id="@+id/action_item4"
         android:icon="@drawable/logo_oggetto"
-        android:title="AAA"/>
+        android:title="INTERVENTI"/>
 </menu>

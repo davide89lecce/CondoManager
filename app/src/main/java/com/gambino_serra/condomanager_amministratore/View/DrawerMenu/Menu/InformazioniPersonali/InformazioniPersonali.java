@@ -10,7 +10,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.gambino_serra.condomanager_amministratore.Model.Entity.Fornitore;
+import com.gambino_serra.condomanager_amministratore.Model.Entity.Amministratore;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,19 +24,17 @@ public class InformazioniPersonali extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    TextView Tnome_azienda;
     TextView Tnome;
-    TextView Tcategoria;
+    TextView Tstudio;
     TextView Ttelefono;
-    TextView Tpartita_iva;
     TextView Temail;
-    TextView Tindirizzo;
-    String uidFornitore;
+    TextView Tsede;
+    String uidAmministratore;
 
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
 
-    Map<String, Object> dettaglioFornitoreMap;
+    Map<String, Object> dettaglioAmministratoreMap;
 
     public InformazioniPersonali() {}
 
@@ -50,19 +48,17 @@ public class InformazioniPersonali extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
+        }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this Menu
         View view = inflater.inflate(R.layout.bacheca_informazioni_personali,container,false);
-         Tnome = (TextView) view.findViewById(R.id.FornNome);
-         Tnome_azienda = (TextView) view.findViewById(R.id.FornNomeAzienda);
-         Tcategoria = (TextView) view.findViewById(R.id.FornSettore);
-         Tpartita_iva = (TextView) view.findViewById(R.id.FornPartIVA);
-         Ttelefono = (TextView) view.findViewById(R.id.FornTelefono);
-         Temail = (TextView) view.findViewById(R.id.FornEmail);
-         Tindirizzo = (TextView) view.findViewById(R.id.FornIndirizzo);
+         Tnome = (TextView) view.findViewById(R.id.AmmNome);
+         Tstudio = (TextView) view.findViewById(R.id.AmmStudio);
+         Tsede = (TextView) view.findViewById(R.id.AmmSede);
+         Ttelefono = (TextView) view.findViewById(R.id.AmmTelefono);
+         Temail = (TextView) view.findViewById(R.id.AmmEmail);
         return view;
         }
 
@@ -73,40 +69,38 @@ public class InformazioniPersonali extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        uidFornitore = firebaseUser.getUid().toString();
+        uidAmministratore = firebaseUser.getUid().toString();
 
         Query prova;
-        prova = FirebaseDB.getFornitori().orderByKey().equalTo(uidFornitore);
+        prova = FirebaseDB.getAmministratori().orderByKey().equalTo(uidAmministratore);
         prova.addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                dettaglioFornitoreMap = new HashMap<String, Object>();
-                dettaglioFornitoreMap.put("uidFornitore", dataSnapshot.getKey());
+                dettaglioAmministratoreMap = new HashMap<String, Object>();
+                dettaglioAmministratoreMap.put("uidAmministratore", dataSnapshot.getKey());
 
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    dettaglioFornitoreMap.put(child.getKey(), child.getValue());
+                    dettaglioAmministratoreMap.put(child.getKey(), child.getValue());
                     }
 
-                Fornitore fornitore = new Fornitore(
-                        dettaglioFornitoreMap.get("uidFornitore").toString(),
-                        dettaglioFornitoreMap.get("nome").toString(),
-                        dettaglioFornitoreMap.get("nome_azienda").toString(),
-                        dettaglioFornitoreMap.get("categoria").toString(),
-                        dettaglioFornitoreMap.get("partita_iva").toString(),
-                        dettaglioFornitoreMap.get("telefono").toString(),
-                        dettaglioFornitoreMap.get("indirizzo").toString(),
-                        dettaglioFornitoreMap.get("email").toString());
+                Amministratore amministratore = new Amministratore(
+                        dettaglioAmministratoreMap.get("uidAmministratore").toString(),
+                        dettaglioAmministratoreMap.get("nome").toString(),
+                        dettaglioAmministratoreMap.get("codicefiscale").toString(),
+                        dettaglioAmministratoreMap.get("studio").toString(),
+                        dettaglioAmministratoreMap.get("sede").toString(),
+                        dettaglioAmministratoreMap.get("email").toString() ,
+                        dettaglioAmministratoreMap.get("telefono").toString()
+                        );
 
-                Tnome.setText(fornitore.getNome());
-                Tnome_azienda.setText(fornitore.getNome_azienda());
-                Tcategoria.setText(fornitore.getCategoria());
-                Tpartita_iva.setText(fornitore.getPartita_iva());
-                Ttelefono.setText(fornitore.getTelefono());
-                Temail.setText(fornitore.getEmail());
-                Tindirizzo.setText(fornitore.getIndirizzo());
-            }
+                Tnome.setText(amministratore.getNome());
+                Tstudio.setText(amministratore.getStudio());
+                Tsede.setText(amministratore.getSede());
+                Ttelefono.setText(amministratore.getTelefono());
+                Temail.setText(amministratore.getEmail());
+                }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) { }

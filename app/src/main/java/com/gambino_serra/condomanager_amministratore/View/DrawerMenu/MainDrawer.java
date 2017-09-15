@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.support.v4.app.Fragment;
+
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -21,8 +21,6 @@ import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.GestioneCondomini.GestioneCondomini;
 import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.InformazioniPersonali.InformazioniPersonali;
-import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.StoricoInterventi.BachecaInterventiArchiviati;
-import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.GestioneCondomini.GestioneCondomini;
 import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.GestioneFornitori.GestioneFornitori;
 import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.GestioneStabili.GestioneStabili;
 import com.gambino_serra.condomanager_amministratore.View.Home.Home;
@@ -154,8 +152,8 @@ public class MainDrawer extends AppCompatActivity {
                 return infoFragment;
             case 2:
                 // storico inteventi
-                BachecaInterventiArchiviati interventiFragment = new BachecaInterventiArchiviati();
-                return interventiFragment;
+                //BachecaInterventiArchiviati interventiFragment = new BachecaInterventiArchiviati();
+                //return interventiFragment;
             case 3:
                 // gestione condomini
                 GestioneCondomini GestioneCondominiFragment = new GestioneCondomini();

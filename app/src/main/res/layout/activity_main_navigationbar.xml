@@ -8,6 +8,39 @@
     android:layout_height="match_parent"
     tools:context="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer">
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorPrimary"
+        android:elevation="0dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/D_Sezione"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Sezione"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="0dp"
@@ -18,12 +51,12 @@
         android:layout_marginTop="0dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="0dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
-        android:background="@color/background" >
+        android:background="@color/background"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
     </FrameLayout>
 
@@ -37,6 +70,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:background="@color/grey_200"
+        android:elevation="12dp"
         app:itemIconTint="@color/nav_item_state_list"
         app:itemTextColor="@color/nav_item_state_list"
         app:itemBackground="@android:color/transparent"

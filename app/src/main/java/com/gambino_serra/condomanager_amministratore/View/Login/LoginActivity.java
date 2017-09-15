@@ -151,16 +151,6 @@ public class LoginActivity extends BaseActivity  {
 
 
 
-//    private void writeSharedPreferences(String username, String password, String tipo_utente){
-//
-//        final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-//        SharedPreferences.Editor editor =sharedPrefs.edit();
-//        editor.putString(TIPO_UTENTE,tipo_utente);
-//        editor.putString(LOGGED_USER,username);
-//        editor.apply();
-//        }
-
-
     private void checkTipologia(final String UID) {
 
         //PUNTO NELLA TABELLA "CONDOMINI" ALL'UTENTE LOGGATO
@@ -174,7 +164,6 @@ public class LoginActivity extends BaseActivity  {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if ( dataSnapshot.exists() )
                     {
-                    Toast.makeText(getApplicationContext(), "LOGIN EFFETTUATO", Toast.LENGTH_SHORT).show();
                     Intent in = new Intent(getApplicationContext(), MainDrawer.class);
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in);
@@ -188,31 +177,3 @@ public class LoginActivity extends BaseActivity  {
         });
     }
 }
-
-
-/**
-//   UTILIZZO TIPICO DI VALUE_EVENT_LISTENER
-//        public void searchemail(String email){
-//
-//            Firebase ref = new Firebase("https://<myfirebase>.firebaseio.com/users");
-//            Query queryRef = ref.orderByChild("Email").equalTo(email);
-//
-//            ValueEventListener listener = new ValueEventListener() {
-//
-//                @Override
-//                public void onDataChanged(DataSnapshot snapshot) {
-//                    if (snapshot.exists()) {
-//                        for (DataSnapshot child: snapshot.getChildren()) {
-//                            homeintent.putExtra("key", child.getKey());
-//                            startActivity(homeintent);
-//                            break; // exit for loop, we only want one match
-//                          }
-//                    }
-//                    else {
-//                        Toast toast = Toast.makeText(this, "email not found", Toast.LENGTH_SHORT);
-//                    }
-//                }
-//            };
-//            queryRef.addValueEventListener(listener);
-//        }
- */

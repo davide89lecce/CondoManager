@@ -36,7 +36,7 @@ public class AdapterBachecaStabili extends RecyclerView.Adapter<AdapterBachecaSt
 
     @Override
     public AdapterBachecaStabili.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_stabile, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_stabile, parent, false);
 
         //Setta l'onclick sulla recycler view presente nella classe Interventi
         view.setOnClickListener(BachecaStabili.myOnClickListener);

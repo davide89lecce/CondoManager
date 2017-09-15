@@ -26,7 +26,6 @@ import com.firebase.client.Query;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.MarkerStabile;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer;
-import com.gambino_serra.condomanager_amministratore.View.Home.InterventiInCorso.InterventoInCorso.InterventoInCorso;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -90,7 +89,7 @@ public class MappaStabili extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mappa_interventi_in_corso);
+        setContentView(R.layout.mappa_stabili);
 
         firebaseAuth = FirebaseAuth.getInstance();
         data = new ArrayList<MarkerStabile>();
@@ -392,7 +391,7 @@ public class MappaStabili extends FragmentActivity implements
                             public void onInfoWindowClick(Marker arg0) {
                                 for (final MarkerStabile stabile : stabili) {
                                     if ((stabile.getNomeStabile()).equals(arg0.getTitle())) {
-                                        Intent intent = new Intent(getApplicationContext(), InterventoInCorso.class);
+                                        Intent intent = new Intent(getApplicationContext(), MainDrawer.class);//TODO fai apparire info generiche condominio
                                         bundle.putString("idStabile", stabile.getIdStabile());
                                         intent.putExtras(bundle);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
