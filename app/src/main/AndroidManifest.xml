@@ -46,8 +46,13 @@
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gambino_serra.condomanager_amministratore.View.Stabile.SezioneStabile"
+            android:name="com.gambino_serra.condomanager_amministratore.View.SezioneStabile.SezioneStabile"
             android:label="@string/title_sezione_stabili"
+            android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Messaggi.DettaglioMessaggio"
+            android:label="@string/title_details_intervento"
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
         <activity

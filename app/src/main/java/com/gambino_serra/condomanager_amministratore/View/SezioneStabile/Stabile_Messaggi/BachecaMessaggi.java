@@ -1,16 +1,19 @@
 package com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Messaggi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -18,9 +21,9 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
-import com.gambino_serra.condomanager_amministratore.Model.Entity.Avviso;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.Messaggio;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
+import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Avvisi.BachecaAvvisi;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -103,7 +106,7 @@ public class BachecaMessaggi extends Fragment {
         messaggioMap = new HashMap<String,Object>();
         messaggi = new ArrayList<Messaggio>();
 
-        //myOnClickListener = new BachecaAvvisi.MyOnClickListener(context);
+        myOnClickListener = new MyOnClickListener(context);
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_Messaggi);
         recyclerView.setHasFixedSize(true);
@@ -199,5 +202,36 @@ public class BachecaMessaggi extends Fragment {
 
             }
         });
+    }
+
+
+    private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
+
+        private final Context context;
+
+        private MyOnClickListener(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public void onClick(View v) {
+            detailsSegnalazione(v);
+        }
+
+        private void detailsSegnalazione(View v) {
+
+            int selectedItemPosition = recyclerView.getChildPosition(v);
+            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
+            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.textViewIdSegnalazione);
+            String selectedName = (String) textViewName.getText();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("idMessaggio", selectedName);
+
+            Intent intent = new Intent(context, DettaglioMessaggio.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
     }
 }
