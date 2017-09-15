@@ -68,7 +68,39 @@ public class TicketIntervento {
         this.longitudine = longitudine;
     }
 
+    public TicketIntervento(String idTicketIntervento,
+                            String uidAmministratore,
+                            String dataTicket,
+                            String dataUltimoAggiornamento,
+                            String fornitore,
+                            String messaggioCondomino,
+                            String aggiornamentoCondomini,
+                            String descrizioneCondomini,
+                            String oggetto,
+                            String rapportiIntervento,
+                            String richiesta,
+                            String stabile,
+                            String stato,
+                            String priorità,
+                            String foto
+    ) {
 
+        this.idTicketIntervento = idTicketIntervento;
+        this.uidAmministratore = uidAmministratore;
+        this.dataTicket = dataTicket;
+        this.dataUltimoAggiornamento = dataUltimoAggiornamento;
+        this.fornitore = fornitore;
+        this.messaggioCondomino = messaggioCondomino;
+        this.aggiornamentoCondomini = aggiornamentoCondomini;
+        this.descrizioneCondomini = descrizioneCondomini;
+        this.oggetto = oggetto;
+        this.rapportiIntervento = rapportiIntervento;
+        this.richiesta = richiesta;
+        this.stabile = stabile;
+        this.stato = stato;
+        this.priorità = priorità;
+        this.foto = foto;
+    }
 
     public String getIdTicketIntervento() {
         return idTicketIntervento;

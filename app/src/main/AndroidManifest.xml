@@ -85,6 +85,21 @@
             android:label="@string/title_details_intervento"
             android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoTicketIntervento.SelezionaFornitoreIntervento"
+            android:label="@string/title_details_intervento"
+            android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoTicketIntervento.SelezionaCategoriaIntervento"
+            android:label="@string/title_details_intervento"
+            android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoTicketIntervento.CreaTicketFinale"
+            android:label="@string/title_details_intervento"
+            android:parentActivityName="com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

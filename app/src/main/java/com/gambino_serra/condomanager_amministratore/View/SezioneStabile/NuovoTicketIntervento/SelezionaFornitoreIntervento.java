@@ -3,16 +3,12 @@ package com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoT
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -244,6 +240,11 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
             TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.textViewUidFornitore);
             String selectedName = (String) textViewName.getText();
+
+            final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString("uidFornitore", selectedName);
+            editor.apply();
 
             Bundle bundle = new Bundle();
             bundle.putString("uidFornitore", selectedName);
