@@ -93,7 +93,7 @@ public class BachecaAvvisi extends Fragment {
             idStabile = sharedPrefs.getString("idStabile", "").toString();
 
             bundle = new Bundle();
-            bundle.putString("uidFornitore", idStabile);
+            bundle.putString("idStabile", idStabile);
 
         }
 

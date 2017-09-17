@@ -56,7 +56,8 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
     private ImageView BottoneMappa;
 
     View listaCategorie;
-    String categoria;
+    static String categoria;
+    static String idStabile;
     Bundle bundle;
     Map<String, Object> FornitoreMap;
     ArrayList<Fornitore> fornitori;
@@ -69,6 +70,7 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seleziona_fornitore_intervento);
 
+        context = getApplicationContext();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         uidAmministratore = firebaseUser.getUid().toString();
@@ -78,13 +80,17 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             bundle = getIntent().getExtras();
+            idStabile = bundle.get("idStabile").toString();
             categoria = bundle.get("categoria").toString(); // prende l'identificativo per fare il retrieve delle info
             SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString("idStabile", idStabile);
             editor.putString("categoria", categoria);
             editor.apply();
         } else {
+            idStabile = sharedPrefs.getString("idStabile", "").toString();
             categoria = sharedPrefs.getString("categoria", "").toString();
             bundle = new Bundle();
+            bundle.putString("idStabile", idStabile);
             bundle.putString("categoria", categoria);
         }
 
@@ -144,10 +150,10 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
                 // Inizializziamo un contenitore per i dati del fornitore che ci interessa
                 FornitoreMap = new HashMap<String,Object>();
                 // Il primo dato da inserire nel map è l'UID che ricavo dalla rubrica
-                FornitoreMap.put("uid", dataSnapshot.getKey().toString());
+                FornitoreMap.put("uidRubrica", dataSnapshot.getKey().toString());
 
                 // Passo l'UID alla funzione che punterà alla tabella fornitori per recuperare gli altri dati
-                prendiDettagliFornitore(dataSnapshot.getKey().toString());
+                prendiDettagliFornitore( FornitoreMap.get("uidRubrica").toString() );
 
             }
 
@@ -180,9 +186,11 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
                 //HashMap temporaneo per immagazzinare i dati del fornitore
                 // per ognuno dei figli presenti nello snapshot, ovvero per tutti i figli di un singolo nodo Fornitore
                 // recuperiamo i dati per inserirli nel MAP
+                FornitoreMap.put("uid", dataSnapshot.getKey());
+
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     FornitoreMap.put(child.getKey(), child.getValue());
-                    }
+                }
 
                 Fornitore fornitore = new Fornitore(
                         FornitoreMap.get("uid").toString(),
@@ -227,29 +235,27 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
 
         private MyOnClickListener(Context context) {
             this.context = context;
-            }
+        }
 
         @Override
         public void onClick(View v) {
-            detailsFornitore(v);
-            }
+            inserisciDatiFinali(v);
+        }
 
-        private void detailsFornitore(View v) {
+        private void inserisciDatiFinali(View v) {
 
             int selectedItemPosition = recyclerView.getChildPosition(v);
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
             TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.textViewUidFornitore);
             String selectedName = (String) textViewName.getText();
 
-            final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("uidFornitore", selectedName);
-            editor.apply();
-
+            //TODO salva anche nelle share non si sa mai
             Bundle bundle = new Bundle();
+            bundle.putString("idStabile", idStabile);
+            bundle.putString("categoria", categoria);
             bundle.putString("uidFornitore", selectedName);
 
-            Intent intent = new Intent(context, DettaglioFornitore.class);
+            Intent intent = new Intent(context, CreaTicketFinale.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

@@ -13,16 +13,18 @@ public class CardTicketIntervento implements Comparable<CardTicketIntervento> {
     private String aggiornamentoCondomini;
     private String dataTicket;
     private String dataUltimoAggiornamento;
+    private String numeroAggiornamenti;
 
     public CardTicketIntervento(String idTicketIntervento,
-                                String idStabile,
-                                String oggetto,
-                                String priorità,
-                                String stato,
-                                String descrizioneCondomini,
-                                String aggiornamentoCondomini,
-                                String dataTicket,
-                                String dataUltimoAggiornamento) {
+                                 String idStabile,
+                                 String oggetto,
+                                 String priorità,
+                                 String stato,
+                                 String descrizioneCondomini,
+                                 String aggiornamentoCondomini,
+                                 String dataTicket,
+                                 String dataUltimoAggiornamento,
+                                String numeroAggiornamenti) {
 
 
         this.idTicketIntervento = idTicketIntervento;
@@ -34,6 +36,7 @@ public class CardTicketIntervento implements Comparable<CardTicketIntervento> {
         this.aggiornamentoCondomini = aggiornamentoCondomini;
         this.dataTicket = dataTicket;
         this.dataUltimoAggiornamento = dataUltimoAggiornamento;
+        this.numeroAggiornamenti = numeroAggiornamenti;
     }
 
     public String getIdTicketIntervento() {
@@ -108,6 +111,13 @@ public class CardTicketIntervento implements Comparable<CardTicketIntervento> {
         this.dataUltimoAggiornamento = dataUltimoAggiornamento;
     }
 
+    public String getNumeroAggiornamenti() {
+        return numeroAggiornamenti;
+    }
+
+    public void setNumeroAggiornamenti(String numeroAggiornamenti) {
+        this.numeroAggiornamenti = numeroAggiornamenti;
+    }
 
     // Metodo per confrontare le card di intervento e dare la precedenza agli interventi con priorità più alta
     @Override

@@ -25,6 +25,7 @@
         app:layout_constraintVertical_bias="0.519">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/notificheMessaggi"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -37,6 +38,19 @@
                 app:layout_constraintRight_toLeftOf="@+id/guideline5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:color/holo_blue_dark" />
+
+
+            <TextView
+                android:id="@+id/textNumMessaggi"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                app:layout_constraintBaseline_toBaselineOf="@+id/t_Nmess"
+                app:layout_constraintRight_toLeftOf="@+id/t_Nmess"
+                android:layout_marginRight="8dp" />
+
 
             <TextView
                 android:id="@+id/t_Nmess"
@@ -97,6 +111,7 @@
                 tools:layout_editor_absoluteY="89dp" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_view_messaggi"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="16dp"
@@ -206,6 +221,7 @@
                 tools:layout_editor_absoluteY="258dp" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_view_avvisi"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="16dp"
@@ -242,6 +258,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/notificheTicket"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -256,7 +273,19 @@
                 app:srcCompat="@android:color/holo_blue_dark" />
 
             <TextView
+                android:id="@+id/textNumAggiornamenti"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                app:layout_constraintBaseline_toBaselineOf="@+id/t_Nrapp"
+                app:layout_constraintRight_toLeftOf="@+id/t_Nrapp"
+                android:layout_marginRight="8dp" />
+
+            <TextView
                 android:id="@+id/t_Nrapp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -266,7 +295,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
                 android:text="Nuovi Rapporti"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintLeft_toLeftOf="@+id/guideline5"
                 app:layout_constraintRight_toRightOf="parent"
@@ -314,6 +343,7 @@
                 tools:layout_editor_absoluteY="432dp" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_view_rapporti"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"

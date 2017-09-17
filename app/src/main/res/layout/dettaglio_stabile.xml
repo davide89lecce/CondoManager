@@ -14,7 +14,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="44dp"
         app:cardBackgroundColor="@color/colorWhite"
         app:cardCornerRadius="3dp"
         app:cardElevation="3dp"
@@ -38,14 +37,15 @@
                 android:id="@+id/cardViewNomeStabile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:cardElevation="0dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -56,14 +56,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginTop="0dp"
                         android:text="Nome Stabile"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toRightOf="@+id/imageView14"
                         app:layout_constraintTop_toTopOf="@+id/imageView14"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView14"
-                        android:layout_marginBottom="0dp"
-                        app:layout_constraintVertical_bias="0.538" />
+                        app:layout_constraintVertical_bias="0.538"
+                        android:layout_marginStart="16dp" />
 
                     <ImageView
                         android:id="@+id/imageView14"
@@ -73,7 +72,8 @@
                         android:layout_marginTop="16dp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/logo_cond" />
+                        app:srcCompat="@drawable/logo_cond"
+                        android:layout_marginStart="16dp" />
 
                     <TextView
                         android:id="@+id/D_NomeStabile"
@@ -83,7 +83,8 @@
                         android:layout_marginTop="16dp"
                         android:text="TextView"
                         app:layout_constraintLeft_toLeftOf="@+id/imageView14"
-                        app:layout_constraintTop_toBottomOf="@+id/V_NomeStabile" />
+                        app:layout_constraintTop_toBottomOf="@+id/V_NomeStabile"
+                        android:layout_marginStart="8dp" />
 
                     <View
                         android:id="@+id/Separator1"
@@ -103,49 +104,47 @@
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
-
-
             <android.support.v7.widget.CardView
                 android:id="@+id/cardViewIndirizzoStabile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="0dp"
-                app:layout_constraintTop_toBottomOf="@id/cardViewNomeStabile"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewNomeStabile"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintVertical_bias="1.0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/V_IndirizzoStabile"
+                        android:id="@+id/V_ResidentiStabile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="0dp"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginTop="0dp"
                         android:text="Indirizzo"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-                        app:layout_constraintLeft_toRightOf="@+id/imageView15"
-                        app:layout_constraintTop_toTopOf="@+id/imageView15"
-                        app:layout_constraintVertical_bias="0.538" />
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+                        app:layout_constraintLeft_toRightOf="@+id/imageView16"
+                        app:layout_constraintTop_toTopOf="@+id/imageView16"
+                        android:layout_marginStart="16dp" />
 
                     <ImageView
-                        android:id="@+id/imageView15"
+                        android:id="@+id/imageView16"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/mappa" />
+                        app:srcCompat="@drawable/mappa"
+                        android:layout_marginStart="16dp" />
 
                     <TextView
                         android:id="@+id/D_IndirizzoStabile"
@@ -154,11 +153,12 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="16dp"
                         android:text="TextView"
-                        app:layout_constraintLeft_toLeftOf="@+id/imageView15"
-                        app:layout_constraintTop_toBottomOf="@+id/V_IndirizzoStabile" />
+                        app:layout_constraintLeft_toLeftOf="@+id/imageView16"
+                        app:layout_constraintTop_toBottomOf="@+id/V_ResidentiStabile"
+                        android:layout_marginStart="8dp" />
 
                     <View
-                        android:id="@+id/Separator2"
+                        android:id="@+id/Separator3"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginBottom="1dp"
@@ -172,6 +172,84 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/D_IndirizzoStabile" />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardViewResidentiStabile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewIndirizzoStabile"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="0dp">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/V_IndirizzoStabile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Condòmini"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView15"
+                        app:layout_constraintLeft_toRightOf="@+id/imageView15"
+                        app:layout_constraintTop_toTopOf="@+id/imageView15"
+                        android:layout_marginStart="16dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/icon_condomini"
+                        android:layout_marginStart="16dp" />
+
+                    <View
+                        android:id="@+id/Separator2"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/recyclerView_residenti" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView_residenti"
+                        android:layout_width="0dp"
+                        android:layout_height="74dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintLeft_toLeftOf="@+id/imageView15"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView15"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="8dp" />
+
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 

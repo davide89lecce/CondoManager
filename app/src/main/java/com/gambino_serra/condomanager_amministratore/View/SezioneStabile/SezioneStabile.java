@@ -127,7 +127,7 @@ public class SezioneStabile extends AppCompatActivity {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item0:
-                                selectedFragment = BachecaSondaggi.newInstance();//TODO INFO STABILE
+                                selectedFragment = BachecaInformazioniStabile.newInstance();
                                 TitoloSezione.setText("INFORMAZONI STABILE");
                                 bottomNavigationView.getMenu().getItem(0).setChecked(true);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
@@ -145,13 +145,13 @@ public class SezioneStabile extends AppCompatActivity {
                                 bottomNavigationView.getMenu().getItem(4).setChecked(false);
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = BachecaSondaggi.newInstance();//TODO INFO STABILE
+                                selectedFragment = BachecaSondaggi.newInstance();
                                 TitoloSezione.setText("BACHECA SONDAGGI");
                                 bottomNavigationView.getMenu().getItem(0).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(1).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                                bottomNavigationView.getMenu().getItem(2).setChecked(false);
                                 bottomNavigationView.getMenu().getItem(3).setChecked(false);
+                                bottomNavigationView.getMenu().getItem(4).setChecked(false);
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = BachecaAvvisi.newInstance();
@@ -181,7 +181,7 @@ public class SezioneStabile extends AppCompatActivity {
                 });
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, BachecaSondaggi.newInstance());//TODO INFO STABILE
+        transaction.replace(R.id.frame_layout, BachecaInformazioniStabile.newInstance());
         transaction.commit();
         //Seleziona l'item interventi in corso
         bottomNavigationView.getMenu().getItem(0).setChecked(true);

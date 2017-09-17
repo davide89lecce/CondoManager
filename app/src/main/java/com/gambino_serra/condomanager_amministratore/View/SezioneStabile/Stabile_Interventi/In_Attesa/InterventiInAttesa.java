@@ -130,7 +130,8 @@ public class InterventiInAttesa extends Fragment {
                         ticketInterventoMap.get("descrizione_condomini").toString(),
                         ticketInterventoMap.get("aggiornamento_condomini").toString(),
                         ticketInterventoMap.get("data_ticket").toString(),
-                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString()
+                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
+                        ticketInterventoMap.get("numero_aggiornamenti").toString()
                 );
 
                 if (       ( cardTicketIntervento_inAttesa.getStato().equals("in attesa")  )

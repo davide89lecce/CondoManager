@@ -184,8 +184,7 @@ public class DettaglioIntervento extends AppCompatActivity {
                         ticketInterventoMap.get("foto").toString(),
                         ticketInterventoMap2.get("nome_azienda").toString(),
                         ticketInterventoMap2.get("nome").toString(),
-                        ticketInterventoMap2.get("categoria").toString(),
-                        "ciao","ciao"
+                        ticketInterventoMap2.get("categoria").toString()
                 );
 
 

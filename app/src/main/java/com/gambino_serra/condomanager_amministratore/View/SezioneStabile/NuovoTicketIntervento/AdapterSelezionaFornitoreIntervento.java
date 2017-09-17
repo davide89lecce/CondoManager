@@ -1,5 +1,6 @@
 package com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoTicketIntervento;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 public class AdapterSelezionaFornitoreIntervento extends RecyclerView.Adapter<AdapterSelezionaFornitoreIntervento.MyViewHolder> {
 
     private ArrayList<Fornitore> dataset;
+    int row;
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -62,6 +65,7 @@ public class AdapterSelezionaFornitoreIntervento extends RecyclerView.Adapter<Ad
         textViewUidFornitore.setText(dataset.get(listPosition).getUid().toString());
         DettaglioFornNome.setText(dataset.get(listPosition).getNome_azienda().toString());
         DettaglioFornCategoria.setText(dataset.get(listPosition).getCategoria());
+
 
     }
 

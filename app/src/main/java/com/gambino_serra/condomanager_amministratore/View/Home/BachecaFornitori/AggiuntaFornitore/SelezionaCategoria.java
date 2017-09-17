@@ -1,5 +1,6 @@
 package com.gambino_serra.condomanager_amministratore.View.Home.BachecaFornitori.AggiuntaFornitore;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -78,20 +79,20 @@ public class SelezionaCategoria extends AppCompatActivity{
         data.add(categoria);
         categoria = new DataCategoria("giardiniere","lavori di giardinaggio");
         data.add(categoria);
-        categoria = new DataCategoria("ascensorista","lavori riguardante l'ascensore");
-        data.add(categoria);
-        categoria = new DataCategoria("servizi di pulizia","lavori di pulizia interna allo stabile e del cortile condominiale");
-        data.add(categoria);
+        //categoria = new DataCategoria("ascensorista","lavori riguardante l'ascensore");
+        //data.add(categoria);
+        //categoria = new DataCategoria("servizi di pulizia","lavori di pulizia interna allo stabile e del cortile condominiale");
+        //data.add(categoria);
         categoria = new DataCategoria("falegname","lavori di falegnameria");
         data.add(categoria);
-        categoria = new DataCategoria("vetraio","lavori di vetreria");
-        data.add(categoria);
-        categoria = new DataCategoria("antennista","lavori riguardanti l'antenna TV");
-        data.add(categoria);
-        categoria = new DataCategoria("automazione","lavori riguardanti automazione per serramenti, controllo accessi, domotica");
-        data.add(categoria);
-        categoria = new DataCategoria("sicurezza","lavori riguardanti impianti antintrusione, videosorveglianza, rilevazione incendi, estintori");
-        data.add(categoria);
+        //categoria = new DataCategoria("vetraio","lavori di vetreria");
+        //data.add(categoria);
+        //categoria = new DataCategoria("antennista","lavori riguardanti l'antenna TV");
+        //data.add(categoria);
+        //categoria = new DataCategoria("automazione","lavori riguardanti automazione per serramenti, controllo accessi, domotica");
+        //data.add(categoria);
+        //categoria = new DataCategoria("sicurezza","lavori riguardanti impianti antintrusione, videosorveglianza, rilevazione incendi, estintori");
+        //data.add(categoria);
         categoria = new DataCategoria("disinfestazione"," ");
         data.add(categoria);
 
@@ -100,10 +101,8 @@ public class SelezionaCategoria extends AppCompatActivity{
 
 
         btnAvanti.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 bundle = new Bundle();
                 Log.d("ciao2",sharedPrefs.getString("categoria", ""));
                 bundle.putString("categoria", sharedPrefs.getString("categoria", ""));
@@ -112,16 +111,14 @@ public class SelezionaCategoria extends AppCompatActivity{
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
+                }
+            });
 
         btnIndietro.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent back = new Intent(getApplicationContext(), MainDrawer.class);
-                back.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(back);
-            }
-        });
+                finish();
+                }
+            });
     }
 
 

@@ -21,8 +21,6 @@ public class TicketIntervento {
     private String nomeAmministratore;
     private String nomeStabile;
     private String indirizzoStabile;
-    private String latitudine;
-    private String longitudine;
 
     public TicketIntervento(String idTicketIntervento,
                             String uidAmministratore,
@@ -41,9 +39,8 @@ public class TicketIntervento {
                             String foto,
                             String nomeAmministratore,
                             String nomeStabile,
-                            String indirizzoStabile,
-                            String latitudine,
-                            String longitudine
+                            String indirizzoStabile
+
     ) {
 
         this.idTicketIntervento = idTicketIntervento;
@@ -64,43 +61,9 @@ public class TicketIntervento {
         this.nomeAmministratore = nomeAmministratore;
         this.nomeStabile = nomeStabile;
         this.indirizzoStabile = indirizzoStabile;
-        this.latitudine = latitudine;
-        this.longitudine = longitudine;
     }
 
-    public TicketIntervento(String idTicketIntervento,
-                            String uidAmministratore,
-                            String dataTicket,
-                            String dataUltimoAggiornamento,
-                            String fornitore,
-                            String messaggioCondomino,
-                            String aggiornamentoCondomini,
-                            String descrizioneCondomini,
-                            String oggetto,
-                            String rapportiIntervento,
-                            String richiesta,
-                            String stabile,
-                            String stato,
-                            String priorità,
-                            String foto
-    ) {
 
-        this.idTicketIntervento = idTicketIntervento;
-        this.uidAmministratore = uidAmministratore;
-        this.dataTicket = dataTicket;
-        this.dataUltimoAggiornamento = dataUltimoAggiornamento;
-        this.fornitore = fornitore;
-        this.messaggioCondomino = messaggioCondomino;
-        this.aggiornamentoCondomini = aggiornamentoCondomini;
-        this.descrizioneCondomini = descrizioneCondomini;
-        this.oggetto = oggetto;
-        this.rapportiIntervento = rapportiIntervento;
-        this.richiesta = richiesta;
-        this.stabile = stabile;
-        this.stato = stato;
-        this.priorità = priorità;
-        this.foto = foto;
-    }
 
     public String getIdTicketIntervento() {
         return idTicketIntervento;
@@ -244,22 +207,6 @@ public class TicketIntervento {
 
     public void setIndirizzoStabile(String indirizzoStabile) {
         this.indirizzoStabile = indirizzoStabile;
-    }
-
-    public String getLatitudine() {
-        return latitudine;
-    }
-
-    public void setLatitudine(String latitudine) {
-        this.latitudine = latitudine;
-    }
-
-    public String getLongitudine() {
-        return longitudine;
-    }
-
-    public void setLongitudine(String longitudine) {
-        this.longitudine = longitudine;
     }
 
 
