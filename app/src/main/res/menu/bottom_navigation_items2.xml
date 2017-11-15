@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_item0"
-        android:icon="@drawable/info_cond_icon"
+        android:icon="@drawable/info"
         android:title="INFO"/>
     <item
         android:id="@+id/action_item1"
-        android:icon="@drawable/logo_descriz"
+        android:icon="@drawable/email"
         android:title="MESSAGGI"/>
     <item
         android:id="@+id/action_item2"
-        android:icon="@drawable/logo_descriz"
+        android:icon="@drawable/survey_logo"
         android:title="SONDAGGI"/>
     <item
         android:id="@+id/action_item3"

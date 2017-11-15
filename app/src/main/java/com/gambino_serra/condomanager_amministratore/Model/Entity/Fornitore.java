@@ -87,4 +87,3 @@ public class Fornitore {
         this.email = email;
     }
 }
-

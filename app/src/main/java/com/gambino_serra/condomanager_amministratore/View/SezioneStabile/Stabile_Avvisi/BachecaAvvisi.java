@@ -1,23 +1,3 @@
-/*
- * Copyright (c) 2017. Truiton (http://www.truiton.com/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Contributors:
- * Mohit Gupt (https://github.com/mohitgupt)
- *
- */
-
 package com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Avvisi;
 
 import android.content.Context;
@@ -31,20 +11,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.Avviso;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -96,15 +74,12 @@ public class BachecaAvvisi extends Fragment {
             bundle.putString("idStabile", idStabile);
 
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.sezionestabile_tab_avvisi, container, false);
     }
-
 
     @Override
     public void onStart() {
@@ -124,9 +99,6 @@ public class BachecaAvvisi extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-
-        //today = DataFormat(); TODO: salva la data odiarna per visualizzare solo gli avvisi non scaduti
 
         // Riferimento alla tabella contenente tutti gli Avvisi
         firebaseDB = FirebaseDB.getAvvisi();
@@ -153,19 +125,38 @@ public class BachecaAvvisi extends Fragment {
                             avvisoMap.get("stabile").toString(),
                             avvisoMap.get("oggetto").toString(),
                             avvisoMap.get("descrizione").toString(),
-                            avvisoMap.get("scadenza").toString()
+                            avvisoMap.get("scadenza").toString(),
+                            avvisoMap.get("tipologia").toString()
                     );
 
+                //Ricava la data attuale e la formatta nel formato appropriato
+                Date dataAttuale = new Date(new Date().getTime());
 
-                    // AGGIUNGE L'AVVISO NELLA STRUTTURA CONTENENTE TUTTI GLI AVVISI
-                    // TODO : if( avviso.getDataScadenza() )
-                    avvisi.add(avviso);
-                //}
-                //catch (NullPointerException e) {
-                  //  Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
-                //}
+                SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                Date dataAvviso = new Date();
+                try{
+                    //Parse di dataAvviso in Date
+                    dataAvviso = dt.parse(avviso.getDataScadenza());
+                 }catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                 }
+
+                //Confronto di data scadenza avviso con data attuale
+                 if(dataAttuale.getTime() < dataAvviso.getTime()){
+                     // AGGIUNGE L'AVVISO NELLA STRUTTURA CONTENENTE TUTTI GLI AVVISI
+                     avvisi.add(avviso);
+                 }
 
                 // AGGIUNGE LA STRUTTURA "AVVISI" NELL'ADAPTER PER VISUALIZZARLO NELLA RECYCLER
+                //Effettua l'ordinamento degli avvisi per importanza
+                Collections.sort(avvisi, new Comparator<Avviso>() {
+                    @Override
+                    public int compare(Avviso avviso1, Avviso avviso2) {
+                        return avviso1.compareTo(avviso2);
+                    }
+                });
+
+
                 adapter = new AdapterBachecaAvvisi(avvisi);
                 recyclerView.setAdapter(adapter);
             }
@@ -183,18 +174,5 @@ public class BachecaAvvisi extends Fragment {
             public void onCancelled(FirebaseError firebaseError) {  }
 
         });
-
     }
-
-
-
-    private String DataFormat() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
-        String timestamp = sdf.format(new Date());
-        return timestamp;
-    }
-
-
-
-
 }

@@ -58,11 +58,12 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
     View listaCategorie;
     static String categoria;
     static String idStabile;
+    static String foto;
     Bundle bundle;
     Map<String, Object> FornitoreMap;
     ArrayList<Fornitore> fornitori;
 
-    //private SelezionaFornitoreIntervento.OnFragmentInteractionListener mListener;
+    //private FornitoreCambiaFornitore.OnFragmentInteractionListener mListener;
 
 
     @Override
@@ -81,21 +82,22 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             bundle = getIntent().getExtras();
             idStabile = bundle.get("idStabile").toString();
+            foto = bundle.get("foto").toString();
             categoria = bundle.get("categoria").toString(); // prende l'identificativo per fare il retrieve delle info
             SharedPreferences.Editor editor = sharedPrefs.edit();
             editor.putString("idStabile", idStabile);
+            editor.putString("foto", foto);
             editor.putString("categoria", categoria);
             editor.apply();
         } else {
             idStabile = sharedPrefs.getString("idStabile", "").toString();
+            foto = sharedPrefs.getString("foto", "").toString();
             categoria = sharedPrefs.getString("categoria", "").toString();
             bundle = new Bundle();
             bundle.putString("idStabile", idStabile);
             bundle.putString("categoria", categoria);
         }
 
-
-        BottoneMappa = (ImageView) findViewById(R.id.BottoneMappa);
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view1);
         recyclerView.setHasFixedSize(true);
@@ -114,15 +116,6 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        BottoneMappa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mappa = new Intent( getApplicationContext(), SelezionaCategoria.class);
-                startActivity(mappa);
-            }
-        });
-
-
         myOnClickListener = new SelezionaFornitoreIntervento.MyOnClickListener(context);
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view1);
@@ -139,21 +132,21 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
 
 
 
-        //lettura di TUTTI i fornitori
-
-        Query query = firebaseDB.child("rubrica_fornitori");
+        //lettura di TUTTI i fornitori nella rubrica
+        Query query = firebaseDB.child("rubrica_fornitori").orderByKey();
 
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 // Inizializziamo un contenitore per i dati del fornitore che ci interessa
-                FornitoreMap = new HashMap<String,Object>();
+                //FornitoreMap = new HashMap<String,Object>();
                 // Il primo dato da inserire nel map è l'UID che ricavo dalla rubrica
-                FornitoreMap.put("uidRubrica", dataSnapshot.getKey().toString());
+               //FornitoreMap.put("uidRubrica", dataSnapshot.getKey().toString());
 
                 // Passo l'UID alla funzione che punterà alla tabella fornitori per recuperare gli altri dati
-                prendiDettagliFornitore( FornitoreMap.get("uidRubrica").toString() );
+                prendiDettagliFornitore( dataSnapshot.getKey().toString() );
+                        //FornitoreMap.get("uidRubrica").toString() );
 
             }
 
@@ -189,7 +182,7 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
                 FornitoreMap.put("uid", dataSnapshot.getKey());
 
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    FornitoreMap.put(child.getKey(), child.getValue());
+                    FornitoreMap.put(child.getKey().toString(), child.getValue().toString());
                 }
 
                 Fornitore fornitore = new Fornitore(
@@ -252,6 +245,7 @@ public class SelezionaFornitoreIntervento extends AppCompatActivity {
             //TODO salva anche nelle share non si sa mai
             Bundle bundle = new Bundle();
             bundle.putString("idStabile", idStabile);
+            bundle.putString("foto", foto);
             bundle.putString("categoria", categoria);
             bundle.putString("uidFornitore", selectedName);
 

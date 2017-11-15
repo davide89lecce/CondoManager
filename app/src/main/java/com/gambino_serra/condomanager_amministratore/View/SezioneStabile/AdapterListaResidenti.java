@@ -22,7 +22,7 @@ public class AdapterListaResidenti extends RecyclerView.Adapter<AdapterListaResi
 
 
     public AdapterListaResidenti.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.residente_row_lista, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_residenti, parent, false);
 
         AdapterListaResidenti.MyViewHolder myViewHolder = new AdapterListaResidenti.MyViewHolder(view);
         return myViewHolder;
@@ -43,7 +43,7 @@ public class AdapterListaResidenti extends RecyclerView.Adapter<AdapterListaResi
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.mNome = (TextView) itemView.findViewById(R.id.row_nome);
+            this.mNome = (TextView) itemView.findViewById(R.id.D_NomeCondomino);
         }
     }
 

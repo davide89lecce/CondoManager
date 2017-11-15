@@ -26,6 +26,7 @@ import com.firebase.client.Query;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.MarkerStabile;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer;
+import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.SezioneStabile;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -184,7 +185,7 @@ public class MappaStabili extends FragmentActivity implements
     }
 
     /**
-     * Il metodo verifica che i servizi di Google siano disponibili, in caso contrario una Dialog viene visualizzata al'utente.
+     * Il metodo verifica che i servizi di Google siano disponibili, in caso contrario una NuovoAvviso viene visualizzata al'utente.
      */
     private boolean isGooglePlayServicesAvailable() {
 
@@ -197,10 +198,10 @@ public class MappaStabili extends FragmentActivity implements
             return true;
             }
         else {
-            // Ricevo la Error Dialog dai servizi Google Play.
+            // Ricevo la Error NuovoAvviso dai servizi Google Play.
             Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
 
-            // Se Google Play services puo' fornire una Error Dialog
+            // Se Google Play services puo' fornire una Error NuovoAvviso
             if (errorDialog != null) {
                 // Creazione di un DialogFragment
                 ErrorDialogFragment errorFragment = new ErrorDialogFragment();
@@ -391,7 +392,7 @@ public class MappaStabili extends FragmentActivity implements
                             public void onInfoWindowClick(Marker arg0) {
                                 for (final MarkerStabile stabile : stabili) {
                                     if ((stabile.getNomeStabile()).equals(arg0.getTitle())) {
-                                        Intent intent = new Intent(getApplicationContext(), MainDrawer.class);//TODO fai apparire info generiche condominio
+                                        Intent intent = new Intent(getApplicationContext(), SezioneStabile.class);
                                         bundle.putString("idStabile", stabile.getIdStabile());
                                         intent.putExtras(bundle);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -408,7 +409,7 @@ public class MappaStabili extends FragmentActivity implements
             }
 
     /**
-     * Il metodo gestisce la comunicazione, tramite Dialog, degli errori che possono verificarsi.
+     * Il metodo gestisce la comunicazione, tramite NuovoAvviso, degli errori che possono verificarsi.
      */
     public static class ErrorDialogFragment extends DialogFragment {
 

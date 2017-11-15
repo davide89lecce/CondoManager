@@ -19,7 +19,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.gambino_serra.condomanager_amministratore.Model.Entity.ListStabile;
+import com.gambino_serra.condomanager_amministratore.Model.Entity.Stabile;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 
 import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.SezioneStabile;
@@ -34,14 +34,14 @@ public class BachecaStabili extends Fragment {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private ArrayList<ListStabile> data;
+    private ArrayList<Stabile> data;
     public static View.OnClickListener myOnClickListener;
     Context context;
 
     private FirebaseAuth firebaseAuth;
     private String uidAmmministratore;
     Map<String, Object> stabileMap;
-    ArrayList<ListStabile> stabili;
+    ArrayList<Stabile> stabili;
     ImageView BottoneMappa;
 
     public static BachecaStabili newInstance() {
@@ -65,9 +65,9 @@ public class BachecaStabili extends Fragment {
 
         context = getContext();
         firebaseAuth = FirebaseAuth.getInstance();
-        data = new ArrayList<ListStabile>();
+        data = new ArrayList<Stabile>();
         stabileMap = new HashMap<String,Object>();
-        stabili = new ArrayList<ListStabile>();
+        stabili = new ArrayList<Stabile>();
 
         myOnClickListener = new MyOnClickListener(context);
 
@@ -103,13 +103,15 @@ public class BachecaStabili extends Fragment {
                 // recuperaDatiStabile (stabileMap);
 
                 try {
-                    ListStabile listStabile = new ListStabile(
+                    Stabile stabile = new Stabile(
                             stabileMap.get("id").toString(),
                             stabileMap.get("nome").toString(),
-                            stabileMap.get("indirizzo").toString()
-                    );
+                            stabileMap.get("indirizzo").toString(),
+                            stabileMap.get("latitudine").toString(),
+                            stabileMap.get("longitudine").toString()
+                            );
 
-                    stabili.add(listStabile);
+                    stabili.add(stabile);
 
                     // Utilizziamo l'adapter per popolare la recycler view
                     adapter = new AdapterBachecaStabili(stabili);

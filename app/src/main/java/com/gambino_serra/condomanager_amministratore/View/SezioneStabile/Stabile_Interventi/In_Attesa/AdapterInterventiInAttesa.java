@@ -1,6 +1,7 @@
 package com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Interventi.In_Attesa;
 
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.CardTicketIntervento;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import java.util.ArrayList;
+
+import static com.gambino_serra.condomanager_amministratore.tesi.R.id.Back_Logo;
 import static com.gambino_serra.condomanager_amministratore.tesi.R.id.Logo_Interv;
+import static com.gambino_serra.condomanager_amministratore.tesi.R.id.circle;
 
 
 public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInterventiInAttesa.MyViewHolder> {
@@ -26,6 +30,8 @@ public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInter
         TextView mDataAgg;
         TextView mAgg;
         ImageView mLogoStato;
+        ImageView mBackStato;
+        ImageView mCircle;
         TextView IdTicket;
 
         public MyViewHolder(View itemView) {
@@ -35,6 +41,8 @@ public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInter
             this.mDataAgg = (TextView) itemView.findViewById(R.id.DataAgg_Interv);
             this.mAgg = (TextView) itemView.findViewById(R.id.Aggiornamento_Interv);
             this.mLogoStato = (ImageView) itemView.findViewById(Logo_Interv);
+            this.mBackStato = (ImageView) itemView.findViewById(Back_Logo);
+            this.mCircle = (ImageView) itemView.findViewById(circle);
             //Campo nascosto per recuperare il riferimento
             this.IdTicket = (TextView) itemView.findViewById(R.id.IDTicket);
         }
@@ -63,17 +71,26 @@ public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInter
         TextView mOggetto = holder.mOggetto;
         TextView mStato = holder.mStato;
         TextView mDataAgg = holder.mDataAgg;
-        TextView mAgg = holder.mAgg;
         ImageView mLogoStato = holder.mLogoStato;
+        ImageView mBackStato = holder.mBackStato;
+        ImageView mCircle = holder.mCircle;
         TextView IdTicket = holder.IdTicket;
 
 
         mOggetto.setText(dataset.get(listPosition).getOggetto());
         //mStato.setText(dataset.get(listPosition).getStato());
-        mDataAgg.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
-        mAgg.setText(dataset.get(listPosition).getAggiornamentoCondomini());
         IdTicket.setText(dataset.get(listPosition).getIdTicketIntervento());
         //textViewSegnalazione.setText( dataset.get(listPosition).getOggetto());
+
+
+        // Se non è stato ancora inserito un aggiornamento, verrà visualizzata la prima descrizione
+        // inserita dall'amministratore, altrimenti verranno visualizzati i dati dell'ultimo
+        // aggiornamento inserito con relativa data
+        if ( dataset.get(listPosition).getAggiornamentoCondomini().equals("-")){
+            mDataAgg.setText(dataset.get(listPosition).getDataTicket());
+        }else{
+            mDataAgg.setText(dataset.get(listPosition).getDataUltimoAggiornamento());
+        }
 
 
         String stato = dataset.get(listPosition).getStato();
@@ -83,28 +100,33 @@ public class AdapterInterventiInAttesa extends RecyclerView.Adapter<AdapterInter
             // intervento richiesto o rifiutato (al condomino interressa solo che sia stato processato
             // dall'amministratore, se un fornitore lo rifiuterà, lui lo vedrà ancora in attesa
             // di essere preso in carico
-            case "in attesa" :
-            case "rifiutato" :
-            {
-                mLogoStato.setImageResource(R.drawable.tool_blue);
+            case "in attesa": {
+                mBackStato.setColorFilter(Color.parseColor("#68cdfa"));
+                mCircle.setColorFilter(Color.parseColor("#68cdfa"));
                 mStato.setText("Intervento Richiesto");
                 break;
             }
 
             case "in corso": // intervento in corso
             {
-                mLogoStato.setImageResource(R.drawable.tool_orange);
+                mBackStato.setColorFilter(Color.parseColor("#ffa726"));
+                mCircle.setColorFilter(Color.parseColor("#ffa726"));
                 mStato.setText("Intervento in Corso");
                 break;
             }
             case "completato":   // intervento concluso
-            case "archiviato":
-            {
-                mLogoStato.setImageResource(R.drawable.tool_green);
+            case "archiviato": {
+                mBackStato.setColorFilter(Color.parseColor("#88f741"));
+                mCircle.setColorFilter(Color.parseColor("#88f741"));
                 mStato.setText("Intervento Completato");
                 break;
             }
-
+            case "rifiutato": {
+                mBackStato.setColorFilter(Color.parseColor("#e73f42"));
+                mCircle.setColorFilter(Color.parseColor("#e73f42"));
+                mStato.setText("Intervento Rifiutato");
+                break;
+            }
             default:
         }
 

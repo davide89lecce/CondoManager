@@ -22,8 +22,6 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.CardTicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.SezioneStabile;
-import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Interventi.DettaglioIntervento;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -180,16 +178,14 @@ public class InterventiInAttesa extends Fragment {
             String selectedName = (String) textViewName.getText();//TODO: controlla textViewName
 
             Bundle bundle = new Bundle();
-            bundle.putString("idTicket", selectedName);
+            bundle.putString("idIntervento", selectedName);
 
-            Intent intent = new Intent(context, DettaglioIntervento.class);
+            Intent intent = new Intent(context, com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Interventi.Intervento.Intervento.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 
         }
     }
-
-
 
 }

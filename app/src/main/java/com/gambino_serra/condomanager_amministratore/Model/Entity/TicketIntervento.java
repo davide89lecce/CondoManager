@@ -8,17 +8,17 @@ public class TicketIntervento {
     private String dataTicket;
     private String dataUltimoAggiornamento;
     private String fornitore;
-    private String messaggioCondomino;
     private String aggiornamentoCondomini;
     private String descrizioneCondomini;
     private String oggetto;
-    private String rapportiIntervento;
     private String richiesta;
     private String stabile;
     private String stato;
     private String priorità;
     private String foto;
-    private String nomeAmministratore;
+    private String categoria;
+    private String nomeFornitore;
+    private String nomeAziendaFornitore;
     private String nomeStabile;
     private String indirizzoStabile;
 
@@ -27,17 +27,17 @@ public class TicketIntervento {
                             String dataTicket,
                             String dataUltimoAggiornamento,
                             String fornitore,
-                            String messaggioCondomino,
                             String aggiornamentoCondomini,
                             String descrizioneCondomini,
                             String oggetto,
-                            String rapportiIntervento,
                             String richiesta,
                             String stabile,
                             String stato,
                             String priorità,
                             String foto,
-                            String nomeAmministratore,
+                            String categoria,
+                            String nomeFornitore,
+                            String nomeAziendaFornitore,
                             String nomeStabile,
                             String indirizzoStabile
 
@@ -48,17 +48,17 @@ public class TicketIntervento {
         this.dataTicket = dataTicket;
         this.dataUltimoAggiornamento = dataUltimoAggiornamento;
         this.fornitore = fornitore;
-        this.messaggioCondomino = messaggioCondomino;
         this.aggiornamentoCondomini = aggiornamentoCondomini;
         this.descrizioneCondomini = descrizioneCondomini;
         this.oggetto = oggetto;
-        this.rapportiIntervento = rapportiIntervento;
         this.richiesta = richiesta;
         this.stabile = stabile;
         this.stato = stato;
         this.priorità = priorità;
         this.foto = foto;
-        this.nomeAmministratore = nomeAmministratore;
+        this.categoria = categoria;
+        this.nomeFornitore = nomeFornitore;
+        this.nomeAziendaFornitore = nomeAziendaFornitore;
         this.nomeStabile = nomeStabile;
         this.indirizzoStabile = indirizzoStabile;
     }
@@ -105,14 +105,6 @@ public class TicketIntervento {
         this.fornitore = fornitore;
     }
 
-    public String getMessaggioCondomino() {
-        return messaggioCondomino;
-    }
-
-    public void setMessaggioCondomino(String messaggioCondomino) {
-        this.messaggioCondomino = messaggioCondomino;
-    }
-
     public String getAggiornamentoCondomini() {
         return aggiornamentoCondomini;
     }
@@ -135,14 +127,6 @@ public class TicketIntervento {
 
     public void setOggetto(String oggetto) {
         this.oggetto = oggetto;
-    }
-
-    public String getRapportiIntervento() {
-        return rapportiIntervento;
-    }
-
-    public void setRapportiIntervento(String rapportiIntervento) {
-        this.rapportiIntervento = rapportiIntervento;
     }
 
     public String getRichiesta() {
@@ -186,11 +170,11 @@ public class TicketIntervento {
     }
 
     public String getNomeAmministratore() {
-        return nomeAmministratore;
+        return nomeFornitore;
     }
 
     public void setNomeAmministratore(String nomeAmministratore) {
-        this.nomeAmministratore = nomeAmministratore;
+        this.nomeFornitore = nomeAmministratore;
     }
 
     public String getNomeStabile() {
@@ -209,5 +193,27 @@ public class TicketIntervento {
         this.indirizzoStabile = indirizzoStabile;
     }
 
+    public String getNomeFornitore() {
+        return nomeFornitore;
+    }
 
+    public void setNomeFornitore(String nomeFornitore) {
+        this.nomeFornitore = nomeFornitore;
+    }
+
+    public String getNomeAziendaFornitore() {
+        return nomeAziendaFornitore;
+    }
+
+    public void setNomeAziendaFornitore(String nomeAziendaFornitore) {
+        this.nomeAziendaFornitore = nomeAziendaFornitore;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }

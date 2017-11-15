@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -54,7 +55,7 @@ public class ListaFornitori extends Fragment {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-    private ImageView BottoneMappa;
+    private FloatingActionButton BottoneMappa;
 
     Map<String, Object> FornitoreMap;
     ArrayList<Fornitore> fornitori;
@@ -114,7 +115,7 @@ public class ListaFornitori extends Fragment {
         FornitoreMap = new HashMap<String,Object>();
         fornitori = new ArrayList<Fornitore>();
 
-        BottoneMappa = (ImageView) getActivity().findViewById(R.id.BottoneMappa);
+        BottoneMappa = (FloatingActionButton) getActivity().findViewById(R.id.BottoneMappa);
         BottoneMappa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,20 +143,15 @@ public class ListaFornitori extends Fragment {
 
         //lettura di TUTTI i fornitori
 
-        Query query = firebaseDB.child("rubrica_fornitori");
+        Firebase rubrica = FirebaseDB.getAmministratori().child(uidAmministratore).child("rubrica_fornitori");
 
-        query.addChildEventListener(new ChildEventListener() {
+        rubrica.addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                // Inizializziamo un contenitore per i dati del fornitore che ci interessa
-                FornitoreMap = new HashMap<String,Object>();
-                // Il primo dato da inserire nel map è l'UID che ricavo dalla rubrica
-                FornitoreMap.put("uid", dataSnapshot.getKey().toString());
-
                 // Passo l'UID alla funzione che punterà alla tabella fornitori per recuperare gli altri dati
-                prendiDettagliFornitore(dataSnapshot.getKey().toString());
+                prendiDettagliFornitore( dataSnapshot.getKey().toString() );
 
             }
 
@@ -175,17 +171,25 @@ public class ListaFornitori extends Fragment {
     }
 
 
-    public void prendiDettagliFornitore(String idFornitore) {
+    public void prendiDettagliFornitore( String uid ) {
         // in ingresso l'UID del fornitore del quale ci interessano i dettagli
 
         Query query2;
-        query2 = FirebaseDB.getFornitori().orderByKey().equalTo( idFornitore );
+        query2 = FirebaseDB.getFornitori().orderByKey().equalTo( uid );
         // la query sarà fatta sull'uid passato
 
         query2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
                 //HashMap temporaneo per immagazzinare i dati del fornitore
+                // Inizializziamo un contenitore per i dati del fornitore che ci interessa
+                FornitoreMap = new HashMap<String,Object>();
+
+                // Il primo dato da inserire nel map è l'UID che ricavo dalla rubrica
+                FornitoreMap.put("uid", dataSnapshot.getKey().toString());
+
+
                 // per ognuno dei figli presenti nello snapshot, ovvero per tutti i figli di un singolo nodo Fornitore
                 // recuperiamo i dati per inserirli nel MAP
                 for (DataSnapshot child : dataSnapshot.getChildren()) {

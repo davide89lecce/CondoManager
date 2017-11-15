@@ -10,7 +10,8 @@
     <color name="colorBlack">#000000</color>
     <color name="background">#e6f3fd</color>
     <color name="tabColor">#ffb74d</color>
-    <color name="colorSegnalaz">#ea6764</color>
-    <color name="colorMess">#5977c4</color>
+    <color name="colorSegnalaz">#e73f42</color>
+    <color name="colorMess">#60b4da</color>
+    <color name="colorSondag">#1cd4a6</color>
 
 </resources>

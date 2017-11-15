@@ -41,9 +41,13 @@ public class BachecaMessaggi extends Fragment {
     private static final String LOGGED_USER = "username";
     String username;
     private static RecyclerView.Adapter adapter;
+    private static RecyclerView.Adapter adapter2;
     private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager2;
     private static RecyclerView recyclerView;
+    private static RecyclerView recyclerViewNEW;
     public static View.OnClickListener myOnClickListener;
+    public static View.OnClickListener myOnClickListener2;
     Context context;
 
     private Firebase firebaseDB;
@@ -58,6 +62,7 @@ public class BachecaMessaggi extends Fragment {
 
     Map<String, Object> messaggioMap;
     ArrayList<Messaggio> messaggi;
+    ArrayList<Messaggio> messaggiNuovi;
 
 
     public static BachecaMessaggi newInstance() {
@@ -101,15 +106,22 @@ public class BachecaMessaggi extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         messaggioMap = new HashMap<String,Object>();
         messaggi = new ArrayList<Messaggio>();
+        messaggiNuovi = new ArrayList<Messaggio>();
 
         myOnClickListener = new MyOnClickListener(context);
+        myOnClickListener2 = new MyOnClickListener2(context);
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_Messaggi);
         recyclerView.setHasFixedSize(true);
+        recyclerViewNEW = (RecyclerView) getActivity().findViewById(R.id.my_recycler_MessaggiNuovi);
+        recyclerViewNEW.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        layoutManager2 = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerViewNEW.setLayoutManager(layoutManager2);
+        recyclerViewNEW.setItemAnimator(new DefaultItemAnimator());
 
 
         // Riferimento alla tabella contenente tutti i Messaggi
@@ -124,7 +136,7 @@ public class BachecaMessaggi extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 messaggioMap = new HashMap<String,Object>();
-                messaggioMap.put("id", dataSnapshot.getKey());
+                messaggioMap.put("idMessaggio", dataSnapshot.getKey());
 
                 for ( DataSnapshot child : dataSnapshot.getChildren() ) {
                     messaggioMap.put(child.getKey(), child.getValue());
@@ -153,7 +165,7 @@ public class BachecaMessaggi extends Fragment {
 
 
     private String DataFormat() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         String timestamp = sdf.format(new Date());
         return timestamp;
     }
@@ -177,20 +189,29 @@ public class BachecaMessaggi extends Fragment {
                         M.get("tipologia").toString(),
                         M.get("messaggio").toString(),
                         M.get("data").toString(),
-                        M.get("url").toString()
+                        M.get("url").toString(),
+                        "ciao","ciao", //TODO
+                        M.get("letto").toString()
                 );
 
                 // AGGIUNGE L'AVVISO NELLA STRUTTURA CONTENENTE TUTTI GLI AVVISI
                 // TODO : ordina per data
-                messaggi.add(messaggio);
+
                 //}
                 //catch (NullPointerException e) {
                 //  Toast.makeText(getActivity().getApplicationContext(), "Non riesco ad aprire l'oggetto "+ e.toString(), Toast.LENGTH_LONG).show();
                 //}
 
-                // AGGIUNGE LA STRUTTURA "AVVISI" NELL'ADAPTER PER VISUALIZZARLO NELLA RECYCLER
-                adapter = new AdapterBachecaMessaggi(messaggi);
-                recyclerView.setAdapter(adapter);
+                if ( messaggio.getLetto().equals("no") ) {
+                    // AGGIUNGE LA STRUTTURA "AVVISI" NELL'ADAPTER PER VISUALIZZARLO NELLA RECYCLER
+                    messaggiNuovi.add(messaggio);
+                    adapter2 = new AdapterBachecaMessaggiNonLetti(messaggiNuovi, getActivity());
+                    recyclerViewNEW.setAdapter(adapter2);
+                }else{
+                    messaggi.add(messaggio);
+                    adapter = new AdapterBachecaMessaggiLetti(messaggi, getActivity());
+                    recyclerView.setAdapter(adapter);
+                }
 
             }
             @Override
@@ -217,6 +238,36 @@ public class BachecaMessaggi extends Fragment {
 
             int selectedItemPosition = recyclerView.getChildPosition(v);
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
+            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.textViewIdSegnalazione);
+            String selectedName = (String) textViewName.getText();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("idMessaggio", selectedName);
+
+            Intent intent = new Intent(context, DettaglioMessaggio.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+    }
+
+    private static class MyOnClickListener2 extends AppCompatActivity implements View.OnClickListener {
+
+        private final Context context;
+
+        private MyOnClickListener2(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public void onClick(View v) {
+            detailsSegnalazione(v);
+        }
+
+        private void detailsSegnalazione(View v) {
+
+            int selectedItemPosition = recyclerView.getChildPosition(v);
+            RecyclerView.ViewHolder viewHolder = recyclerViewNEW.findViewHolderForPosition(selectedItemPosition);
             TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.textViewIdSegnalazione);
             String selectedName = (String) textViewName.getText();
 

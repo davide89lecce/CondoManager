@@ -26,30 +26,4 @@
         android:layout_marginLeft="0dp"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/BottoneMappa"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/icona_mappa"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/BottoneMappa"
-        app:layout_constraintLeft_toLeftOf="@+id/BottoneMappa"
-        app:layout_constraintRight_toRightOf="@+id/BottoneMappa"
-        app:layout_constraintTop_toTopOf="@+id/BottoneMappa"
-        app:srcCompat="@drawable/bg_circle"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="8dp" />
-
 </android.support.constraint.ConstraintLayout>

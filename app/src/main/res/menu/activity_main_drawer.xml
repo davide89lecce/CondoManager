@@ -12,26 +12,6 @@
             android:title="Informazioni personali" />
 
         <item
-            android:id="@+id/nav_storico_interventi"
-            android:icon="@drawable/chiave_inglese"
-            android:title="Storico interventi" />
-
-        <item
-            android:id="@+id/nav_gestione_stabili"
-            android:icon="@drawable/logo_cond"
-            android:title="Gestione stabili" />
-
-        <item
-            android:id="@+id/nav_gestione_condomini"
-            android:icon="@drawable/utente"
-            android:title="Gestione condòmini" />
-
-        <item
-            android:id="@+id/nav_gestione_fornitori"
-            android:icon="@drawable/logo_fornitore"
-            android:title="Gestione fornitori" />
-
-        <item
             android:id="@+id/nav_logout"
             android:title="@string/logout"
             android:icon="@drawable/exit" />

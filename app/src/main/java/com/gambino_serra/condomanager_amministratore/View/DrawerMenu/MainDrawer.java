@@ -13,16 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.GestioneCondomini.GestioneCondomini;
-import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.InformazioniPersonali.InformazioniPersonali;
-import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.GestioneFornitori.GestioneFornitori;
-import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.Menu.GestioneStabili.GestioneStabili;
+import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.InformazioniPersonali.InformazioniPersonali;
 import com.gambino_serra.condomanager_amministratore.View.Home.Home;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.github.clans.fab.FloatingActionButton;
@@ -45,10 +41,6 @@ public class MainDrawer extends AppCompatActivity {
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
     private static final String TAG_INFO = "info_personali";
-    private static final String TAG_STORICO_INTERVENTI = "storico_interventi";
-    private static final String TAG_GESTIONE_CONDOMINI = "gestione_condomini";
-    private static final String TAG_GESTIONE_FORNITORI = "gestione_fornitori";
-    private static final String TAG_GESTIONE_STABILI = "gestione_stabili";
 
     public static String CURRENT_TAG = TAG_HOME;
 
@@ -150,22 +142,6 @@ public class MainDrawer extends AppCompatActivity {
                 // info personali
                 InformazioniPersonali infoFragment = new InformazioniPersonali();
                 return infoFragment;
-            case 2:
-                // storico inteventi
-                //BachecaInterventiArchiviati interventiFragment = new BachecaInterventiArchiviati();
-                //return interventiFragment;
-            case 3:
-                // gestione condomini
-                GestioneCondomini GestioneCondominiFragment = new GestioneCondomini();
-                return GestioneCondominiFragment;
-            case 4:
-                // gestione fornitori
-                GestioneFornitori GestioneFornitoriFragment = new GestioneFornitori();
-                return GestioneFornitoriFragment;
-            case 5:
-                // gestione stabili
-                GestioneStabili GestioneStabiliFragment = new GestioneStabili();
-                return GestioneStabiliFragment;
             default:
                 return new Home();
         }
@@ -200,22 +176,6 @@ public class MainDrawer extends AppCompatActivity {
                     case R.id.nav_info_personali:
                         navItemIndex = 1;
                         CURRENT_TAG = TAG_INFO;
-                        break;
-                    case R.id.nav_storico_interventi:
-                        navItemIndex = 2;
-                        CURRENT_TAG = TAG_STORICO_INTERVENTI;
-                        break;
-                    case R.id.nav_gestione_stabili:
-                        navItemIndex = 3;
-                        CURRENT_TAG = TAG_GESTIONE_STABILI;
-                        break;
-                    case R.id.nav_gestione_condomini:
-                        navItemIndex = 4;
-                        CURRENT_TAG = TAG_GESTIONE_CONDOMINI;
-                        break;
-                    case R.id.nav_gestione_fornitori:
-                        navItemIndex = 5;
-                        CURRENT_TAG = TAG_GESTIONE_FORNITORI;
                         break;
                     case R.id.nav_logout:
                         drawer.closeDrawers();

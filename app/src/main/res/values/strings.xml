@@ -2,13 +2,13 @@
 
 
     <!--Navigation Drawer-->
-    <string name="app_name">CondoManager Fornitore</string>
+    <string name="app_name">CondoManager Amministratore</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
-        <item>Home</item>
+        <item>CondoManager</item>
         <item>Informazioni personali</item>
         <item>Storico interventi</item>
         <item>Gestione stabili</item>
@@ -18,20 +18,12 @@
 
     <!--Navigation Bar Home-->
     <string name="tab_bacheca_notifiche">Notifiche</string>
-    <string name="tab_bacheca_condomini">Lista Condomini</string>
-    <string name="tab_bacheca_fornitori">Rubrica Fornitori</string>
+    <string name="tab_bacheca_stabili">Lista stabili</string>
+    <string name="tab_bacheca_fornitori">Rubrica fornitori</string>
     <string name="logout">Logout</string>
 
 
-    <!-- title activity -->
-    <string name="title_login">Accedi</string>
-    <string name="title_register">Registrazione</string>
-    <string name="title_fornitore_home">Homepage Fornitore</string>
-    <string name="title_details_intervento">Dettagli intervento</string>
-    <string name="title_details_richiesta">Dettagli richiesta</string>
-    <string name="title_mappa_interventi_in_corso">Mappa interventi in corso</string>
-    <string name="title_mappa_stabili">Mappa stabili</string>
-    <string name="title_sezione_stabili">Stabile</string>
+
 
     <!-- login -->
     <string name="enter_mail"> Inserisci e-mail</string>
@@ -42,46 +34,7 @@
     <string name="login"> Login in progress... </string>
 
 
-    <!-- dialog conferma archiviazione -->
-    <string name="title_conferma_archiviazione">Segnalazione archiviata</string>
-    <string name="conferma_archiviazione">\n\n Puoi trovare la segnalazione nella sezione \"Archivio\"</string>
 
-
-    <!-- dialog conferma segnalazione rifiutata -->
-    <string name="title_conferma_segnalazione_rifiutata">Segnalazione rifiutata</string>
-    <string name="conferma_segnalazione_rifiutata">\n\n Puoi trovare la segnalazione nella sezione \"Archivio\"</string>
-
-
-    <!-- dialog conferma intervento accettato -->
-    <string name="title_conferma_intervento_accettato">Intervento accettato</string>
-    <string name="conferma_intervento_accettato">\n\n Tutte le informazioni relative all\'intervento saranno visibili nella sezione \"Interventi in programma\"</string>
-
-
-    <!-- dialog conferma intervento rifiutato -->
-    <string name="title_conferma_intervento_rifiutato">Intervento rifiutato</string>
-    <string name="conferma_intervento_rifiutato">\n\n L\'intervento sarà eliminato dalla sezione \"Richieste intervento\"</string>
-
-
-    <!-- dialog conferma intervento rifiutato -->
-    <string name="title_rapporto_intervento">Rapporto intervento</string>
-    <string name="rapporto_intervento">Descrivere l\'intervento effettuato</string>
-    <string name="rapporto_intervento_annulla">chiudi</string>
-    <string name="rapporto_intervento_conferma">conferma</string>
-
-
-    <!-- dialog chiama amministratore -->
-    <string name="title_chiama_ammministratore">Chiama</string>
-    <string name="chiama_amministratore">Chiamare amministratore?"</string>
-    <string name="chiama_amministratore_si">si</string>
-    <string name="chiama_amministratore_no">no</string>
-
-
-    <!-- splash_layout_old-->
-    <string name="splash_descr">image load app</string>
-    <string name="title_activity_main">MainActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

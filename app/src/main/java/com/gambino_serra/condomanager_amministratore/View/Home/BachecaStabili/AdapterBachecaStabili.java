@@ -6,14 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.gambino_serra.condomanager_amministratore.Model.Entity.ListStabile;
+import com.gambino_serra.condomanager_amministratore.Model.Entity.Stabile;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 
 import java.util.ArrayList;
 
 public class AdapterBachecaStabili extends RecyclerView.Adapter<AdapterBachecaStabili.MyViewHolder> {
 
-    private ArrayList<ListStabile> dataset;
+    private ArrayList<Stabile> dataset;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -30,7 +30,7 @@ public class AdapterBachecaStabili extends RecyclerView.Adapter<AdapterBachecaSt
             }
     }
 
-    public AdapterBachecaStabili(ArrayList<ListStabile> dataset) {
+    public AdapterBachecaStabili(ArrayList<Stabile> dataset) {
         this.dataset = dataset;
         }
 

@@ -8,13 +8,17 @@ public class CardRapportoIntervento {
     private String notaAmministratore;
     private String notaFornitore;
     private String ticketIntervento;
+    private String foto;
+    private String letto;
 
-    public CardRapportoIntervento(String idRapportoIntervento, String data, String notaAmministratore, String notaFornitore, String ticketIntervento) {
+    public CardRapportoIntervento(String idRapportoIntervento, String data, String notaAmministratore, String notaFornitore, String ticketIntervento, String foto, String letto) {
         this.idRapportoIntervento = idRapportoIntervento;
         this.data = data;
         this.notaAmministratore = notaAmministratore;
         this.notaFornitore = notaFornitore;
         this.ticketIntervento = ticketIntervento;
+        this.foto = foto;
+        this.letto = letto;
     }
 
     public String getIdRapportoIntervento() {
@@ -55,5 +59,21 @@ public class CardRapportoIntervento {
 
     public void setTicketIntervento(String ticketIntervento) {
         this.ticketIntervento = ticketIntervento;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getLetto() {
+        return letto;
+    }
+
+    public void setLetto(String letto) {
+        this.letto = letto;
     }
 }

@@ -1,7 +1,11 @@
 package com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Messaggi;
 
+import android.app.DialogFragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +18,7 @@ import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.Messaggio;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_amministratore.View.Login.BaseActivity;
+import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.NuovoTicketIntervento.CreaTicketFinale;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,10 +47,13 @@ public class DettaglioMessaggio extends BaseActivity {
     String foto = "";
     String mittente = "";
 
+    Messaggio messaggio;
+
     TextView messaggio_data;
     TextView messaggio_tipologia;
     TextView messaggio_descrizione;
     ImageView messaggio_foto;
+    ConstraintLayout btn_processa;
 
     private FirebaseDB firebaseDB;
     private Firebase dbMessaggi;
@@ -67,11 +75,13 @@ public class DettaglioMessaggio extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sezionestabile_dettaglio_messaggio);
 
+        final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         mStorage = FirebaseStorage.getInstance().getReference();
 
-        final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
+
         username = sharedPrefs.getString(LOGGED_USER, "").toString();
 
         if (getIntent().getExtras() != null) {
@@ -79,7 +89,7 @@ public class DettaglioMessaggio extends BaseActivity {
             idMessaggio = bundle.get("idMessaggio").toString();
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("id", idMessaggio);
+            editor.putString("idMessaggio", idMessaggio);
             editor.apply();
         }
         else {
@@ -92,8 +102,13 @@ public class DettaglioMessaggio extends BaseActivity {
         messaggio_descrizione = (TextView) findViewById(R.id.messaggio_descrizione);
         messaggio_tipologia = (TextView) findViewById(R.id.messaggio_tipologia);
         messaggio_foto = (ImageView) findViewById(R.id.messaggio_foto);
+        btn_processa = (ConstraintLayout) findViewById(R.id.btnProcessa);
 
+        messaggio = new Messaggio();
 
+        // Segna il messaggio come letto
+        Firebase messRef = FirebaseDB.getMessaggiCondomino().child(idMessaggio).child("letto");
+        messRef.setValue("si");
 
         Query prova;
         prova = FirebaseDB.getMessaggiCondomino().orderByKey().equalTo(idMessaggio);
@@ -128,9 +143,47 @@ public class DettaglioMessaggio extends BaseActivity {
             public void onCancelled(FirebaseError firebaseError) { }
 
         });
+
     }
 
-/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
+
+        btn_processa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Se ho recuperato le info con successo (ovvero evito che si clicchi prima del caricamento)
+               if ( ! messaggio.getFoto().isEmpty() ) {
+                   // Usiamo le shared a causa della presenza di una dialog tra questa e l'altra activity
+                   SharedPreferences.Editor editor = sharedPrefs.edit();
+                   editor.putString("foto", messaggio.getFoto());
+                   editor.apply();
+
+                   DialogFragment newFragment = new DialogProcessaMessaggio();
+                   newFragment.show(getFragmentManager(), "ProcessaMessaggio");
+                   overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+
+               }else{}
+
+                //bundle = new Bundle();
+                //bundle.putString("idStabile", messaggio.getIdStabile() );
+                //bundle.putString("foto", messaggio.getFoto() );
+
+                //Intent intent = new Intent(getApplicationContext(), .class);
+                //intent.putExtras(bundle);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //startActivity(intent);
+
+            }
+        });
+    }
+
+
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -151,7 +204,7 @@ public class DettaglioMessaggio extends BaseActivity {
 
 
     /**
-     * Il metodo imposta il messaggio della Dialog.
+     * Il metodo imposta il messaggio della NuovoAvviso.
      */
     @Override
     protected void setMessage() {
@@ -170,14 +223,16 @@ public class DettaglioMessaggio extends BaseActivity {
                 mittente = dataSnapshot.getValue(String.class);
 
                 //try{
-                Messaggio messaggio = new Messaggio(
+                messaggio = new Messaggio(
                         M.get("id").toString(),
                         mittente,
                         M.get("stabile").toString(),
                         M.get("tipologia").toString(),
                         M.get("messaggio").toString(),
                         M.get("data").toString(),
-                        M.get("url").toString()
+                        M.get("url").toString(),
+                        "ciao","ciao", //TODO
+                        M.get("letto").toString()
                 );
 
                 messaggio_tipologia.setText(messaggio.getTipologia());
@@ -198,9 +253,6 @@ public class DettaglioMessaggio extends BaseActivity {
 
                 //Toast.makeText(getApplicationContext(), "Non riesco ad aprire l'oggetto " + e.toString(), Toast.LENGTH_LONG).show();
                 hideProgressDialog();
-
-
-
 
             }
             @Override

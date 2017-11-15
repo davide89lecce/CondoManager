@@ -51,7 +51,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="0dp"
                 android:text="Stabile"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

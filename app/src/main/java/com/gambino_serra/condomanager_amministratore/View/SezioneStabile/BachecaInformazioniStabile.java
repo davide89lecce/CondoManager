@@ -1,10 +1,10 @@
 package com.gambino_serra.condomanager_amministratore.View.SezioneStabile;
 
-
-import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,20 +12,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
-import com.gambino_serra.condomanager_amministratore.Model.Entity.Avviso;
+import com.gambino_serra.condomanager_amministratore.Model.Entity.Stabile;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +43,9 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
 
     TextView mNomeStabile;
     TextView mIndirizzoStabile;
+    ImageView Mappa;
+    String lat= "";
+    String lon= "";
 
     private Bundle bundle;
     private String idStabile;
@@ -53,25 +54,16 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
     Map<String, Object> stabileMap;
     ArrayList<String> residenti;
 
-
     public static BachecaInformazioniStabile newInstance() {
         BachecaInformazioniStabile fragment = new BachecaInformazioniStabile();
         return fragment;
-    }
-
-
+        }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.dettaglio_stabile, container, false);
-
-        mNomeStabile = (TextView) view.findViewById(R.id.D_NomeStabile);
-        mIndirizzoStabile = (TextView) view.findViewById(R.id.D_IndirizzoStabile);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_residenti);
-
         return view;
-    }
+        }
 
 
 
@@ -83,27 +75,22 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
 
         final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(MY_PREFERENCES, getActivity().MODE_PRIVATE);
 
-        if (getActivity().getIntent().getExtras() != null) {
-
+        if (getActivity().getIntent().getExtras() != null)
+            {
             bundle = getActivity().getIntent().getExtras();
             idStabile = bundle.get("idStabile").toString(); // prende l'identificativo per fare il retrieve delle info
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
             editor.putString("idStabile", idStabile);
             editor.apply();
-
-        } else {
-
+            }
+        else
+            {
             idStabile = sharedPrefs.getString("idStabile", "").toString();
-
             bundle = new Bundle();
             bundle.putString("idStabile", idStabile);
-        }
+            }
     }
-
-
-
-
 
     @Override
     public void onStart() {
@@ -111,19 +98,25 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
 
         context = getContext();
         firebaseAuth = FirebaseAuth.getInstance();
-        String nomeResidente;
         stabileMap = new HashMap<String,Object>();
         residenti = new ArrayList<String>();
 
-        //myOnClickListener = new BachecaAvvisi.MyOnClickListener(context);
+        mNomeStabile = (TextView) getActivity().findViewById(R.id.D_NomeStabile);
+        mIndirizzoStabile = (TextView) getActivity().findViewById(R.id.D_IndirizzoStabile);
+        Mappa = (ImageView) getActivity().findViewById(R.id.btnMappa);
 
-        recyclerView.setHasFixedSize(true);
-
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView_residenti);
+        recyclerView.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
+        Mappa.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr="+lat+","+lon));
+                startActivity(intent);
+                }
+            });
 
         // PER VISUALIZZARE LE INFO SULLO STABILE
         firebaseDB = FirebaseDB.getStabili();
@@ -137,15 +130,25 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 stabileMap = new HashMap<String,Object>();
+                stabileMap.put("idStabile", dataSnapshot.getKey().toString());
+
                 for ( DataSnapshot child : dataSnapshot.getChildren()) {
                     stabileMap.put( child.getKey().toString(), child.getValue().toString() );
-                }
+                    }
 
-                String nome = stabileMap.get("nome").toString();
-                String indirizzo = stabileMap.get("indirizzo").toString();
-                //stampainfo ( stabileMap);
-                mNomeStabile.setText( nome );
-                mIndirizzoStabile.setText( indirizzo );
+                Stabile stabile = new Stabile(
+                        stabileMap.get("idStabile").toString(),
+                        stabileMap.get("nome").toString(),
+                        stabileMap.get("indirizzo").toString(),
+                        stabileMap.get("latitudine").toString(),
+                        stabileMap.get("longitudine").toString()
+                        );
+
+                mNomeStabile.setText( stabile.getNomeStabile() );
+                mIndirizzoStabile.setText( stabile.getIndirizzo() );
+
+                lat = stabile.getLatitudine();
+                lon = stabile.getLongitudine();
             }
 
             @Override
@@ -157,23 +160,18 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
             @Override
             public void onCancelled(FirebaseError firebaseError) {}
         });
-
-
 
         // PER STAMPARE LA LISTA DEI RESIDENTI NELLO STABILE
         Firebase listaCondomini;
-        listaCondomini = FirebaseDB.getCondomini().child(idStabile).child("lista_condomini");
+        listaCondomini = FirebaseDB.getStabili().child(idStabile).child("lista_condomini");
 
         Query prova = listaCondomini.orderByKey();
 
-
-        // TODO: NON SI ATTIVA
         prova.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    //if ( dataSnapshot.getValue().toString().equals("true") )
-                        RecuperaNomi (  dataSnapshot.getKey().toString() );
-            }
+                RecuperaNomi (  dataSnapshot.getKey().toString() );
+                }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
@@ -184,7 +182,6 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
             @Override
             public void onCancelled(FirebaseError firebaseError) {}
         });
-
     }
 
     private void stampainfo(Map<String, Object> stabileMap) {
@@ -194,11 +191,10 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
 
         mNomeStabile.setText( nomeStabile );
         mIndirizzoStabile.setText( indirizzoStabile );
-    }
+        }
 
 
     private void RecuperaNomi ( final String uidCondomino ){
-
 
         Firebase firebaseRef = FirebaseDB.getCondomini().child(uidCondomino);
 
@@ -211,19 +207,12 @@ public class BachecaInformazioniStabile extends android.support.v4.app.Fragment 
                 residenti.add( dataSnapshot.getValue(String.class) );
                 adapter = new AdapterListaResidenti( residenti );
                 recyclerView.setAdapter( adapter );
-            }
+                }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
+            public void onCancelled(FirebaseError firebaseError) { }
 
-            }
         });
 
-
-
-
-        //mNomeStabile.setText( stabile.get("nome").toString() );
-        //mIndirizzoStabile.setText( stabile.get("indirizzo").toString() );
     }
-
 }

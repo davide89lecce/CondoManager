@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.gambino_serra.condomanager_amministratore.tesi", appContext.getPackageName());
+        assertEquals("com.gambino_serra.condomanager_amministratore", appContext.getPackageName());
     }
 }

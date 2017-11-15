@@ -36,6 +36,7 @@ public class SelezionaCategoriaIntervento extends AppCompatActivity{
     Bundle bundle;
 
     static String idStabile;
+    static String foto;
     String idSegnalazione;
     String segnalazione;
     String usernameCondomino;
@@ -51,23 +52,16 @@ public class SelezionaCategoriaIntervento extends AppCompatActivity{
 
         final SharedPreferences sharedPrefs = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
 
-        if (getIntent().getExtras() != null) {
-            bundle = getIntent().getExtras();
-            idStabile = bundle.get("idStabile").toString();
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("idStabile", idStabile);
-            editor.apply();
-        } else {
-            idStabile = sharedPrefs.getString("idStabile", "").toString();
-            bundle = new Bundle();
-            bundle.putString("idStabile", idStabile);
-        }
+        // recupera dalle shared i dettagli circa l'id stabile e la foto da allegare nel caso in cui ci sia
+        idStabile = sharedPrefs.getString("idStabile", "").toString();
+        foto = sharedPrefs.getString("foto", "-").toString();
+        bundle = new Bundle();
 
 
         username = sharedPrefs.getString(LOGGED_USER, "").toString();
 
-          btnAvanti = (Button) findViewById(R.id.btnAvanti);
-          btnIndietro = (Button) findViewById(R.id.btnIndietro);
+        btnAvanti = (Button) findViewById(R.id.btnAvanti);
+        btnIndietro = (Button) findViewById(R.id.btnIndietro);
 
 
         removedItems = new ArrayList<Integer>();
@@ -86,23 +80,23 @@ public class SelezionaCategoriaIntervento extends AppCompatActivity{
         data.add(categoria);
         categoria = new DataCategoriaIntevento("idraulico","lavori idraulici (tubature, autoclave, riscaldamento)");
         data.add(categoria);
-        //categoria = new DataCategoriaIntevento("edilizia","lavori di muratura, pavimentazioni/piastrelleria, tetto/solaio, tinteggiatura");
+        //categoria = new DataCategoriaCambiaFornitore("edilizia","lavori di muratura, pavimentazioni/piastrelleria, tetto/solaio, tinteggiatura");
         //data.add(categoria);
         categoria = new DataCategoriaIntevento("giardiniere","lavori di giardinaggio");
         data.add(categoria);
-        //categoria = new DataCategoriaIntevento("ascensorista","lavori riguardante l'ascensore");
+        //categoria = new DataCategoriaCambiaFornitore("ascensorista","lavori riguardante l'ascensore");
         //data.add(categoria);
-        //categoria = new DataCategoriaIntevento("servizi di pulizia","lavori di pulizia interna allo stabile e del cortile condominiale");
+        //categoria = new DataCategoriaCambiaFornitore("servizi di pulizia","lavori di pulizia interna allo stabile e del cortile condominiale");
         //data.add(categoria);
         categoria = new DataCategoriaIntevento("falegname","lavori di falegnameria");
         data.add(categoria);
-        //categoria = new DataCategoriaIntevento("vetraio","lavori di vetreria");
+        //categoria = new DataCategoriaCambiaFornitore("vetraio","lavori di vetreria");
         //data.add(categoria);
-        //categoria = new DataCategoriaIntevento("antennista","lavori riguardanti l'antenna TV");
+        //categoria = new DataCategoriaCambiaFornitore("antennista","lavori riguardanti l'antenna TV");
         //data.add(categoria);
-        //categoria = new DataCategoriaIntevento("automazione","lavori riguardanti automazione per serramenti, controllo accessi, domotica");
+        //categoria = new DataCategoriaCambiaFornitore("automazione","lavori riguardanti automazione per serramenti, controllo accessi, domotica");
         //data.add(categoria);
-        //categoria = new DataCategoriaIntevento("sicurezza","lavori riguardanti impianti antintrusione, videosorveglianza, rilevazione incendi, estintori");
+        //categoria = new DataCategoriaCambiaFornitore("sicurezza","lavori riguardanti impianti antintrusione, videosorveglianza, rilevazione incendi, estintori");
         //data.add(categoria);
         categoria = new DataCategoriaIntevento("disinfestatore","lavori riguardanti impianti antintrusione, videosorveglianza, rilevazione incendi, estintori");
         data.add(categoria);
@@ -118,6 +112,7 @@ public class SelezionaCategoriaIntervento extends AppCompatActivity{
 
                 bundle = new Bundle();
                 bundle.putString("idStabile", idStabile);
+                bundle.putString("foto", foto);
                 bundle.putString("categoria", sharedPrefs.getString("categoria", ""));
 
                 Intent intent = new Intent(getApplicationContext(), SelezionaFornitoreIntervento.class);

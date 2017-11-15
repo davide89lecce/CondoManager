@@ -10,13 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.TicketIntervento;
+import com.gambino_serra.condomanager_amministratore.View.Dialog.DialogVisualizzaFotoRapporto;
 import com.gambino_serra.condomanager_amministratore.View.DrawerMenu.MainDrawer;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +40,7 @@ public class CreaTicketFinale extends AppCompatActivity {
 
     EditText mRichiestaFornitore;
     EditText mDescrizioneCondomino;
+    EditText mOggetto;
     TextView Tnome;
     TextView Tcategoria;
     TextView Ttelefono;
@@ -45,6 +49,8 @@ public class CreaTicketFinale extends AppCompatActivity {
     TextView Tindirizzo;
     ConstraintLayout btnAnnulla;
     ConstraintLayout btnConferma;
+    ImageButton btnFoto;
+    CheckBox mCheckBox;
 
 
 
@@ -52,8 +58,10 @@ public class CreaTicketFinale extends AppCompatActivity {
     String categoria;
     String uidAmministratore;
     String idStabile;
+    String foto;
     String richiesta;
     String descrizione;
+    String oggetto;
     boolean campiOK = false;
 
     private Firebase firebaseDB;
@@ -84,6 +92,7 @@ public class CreaTicketFinale extends AppCompatActivity {
             uidFornitore = bundle.get("uidFornitore").toString(); // prende l'identificativo per fare il retrieve delle info
             categoria = bundle.get("categoria").toString();
             idStabile = bundle.get("idStabile").toString();
+            foto = bundle.get("foto").toString();
             SharedPreferences.Editor editor = sharedPrefs.edit();
             editor.putString("uidfornitore", uidFornitore);
             editor.apply();
@@ -93,22 +102,33 @@ public class CreaTicketFinale extends AppCompatActivity {
             uidFornitore = sharedPrefs.getString("uidFornitore", "").toString();
             categoria = sharedPrefs.getString("categoria", "").toString();
             idStabile = sharedPrefs.getString("idStabile", "").toString();
+            foto = sharedPrefs.getString("foto", "").toString();
 
             bundle = new Bundle();
             bundle.putString("uidFornitore", uidFornitore);
             bundle.putString("categoria", categoria);
             bundle.putString("idStabile", idStabile);
+            bundle.putString("foto", foto);
 
         }
 
 
-        mRichiestaFornitore = (EditText) findViewById(R.id.textViewNotaAmministratore);
-        mDescrizioneCondomino = (EditText) findViewById(R.id.textViewNotaPersonale);
+        mRichiestaFornitore = (EditText) findViewById(R.id.textViewRichiestaFornitore);
+        mDescrizioneCondomino = (EditText) findViewById(R.id.textViewDescrizioneCondomini);
+        mOggetto = (EditText) findViewById(R.id.editTextOggetto);
+        btnFoto = (ImageButton) findViewById(R.id.imageButton);
+        mCheckBox = (CheckBox) findViewById(R.id.checkBoxFoto);
         btnConferma = (ConstraintLayout) findViewById(R.id.btnConferma);
         btnAnnulla = (ConstraintLayout) findViewById(R.id.btnAnnulla);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Ticket_intervento");
+
+        if ( foto.equals("-") )
+        {
+            btnFoto.setVisibility(View.GONE);
+            mCheckBox.setVisibility(View.GONE);
+        }
 
     }
 
@@ -116,15 +136,28 @@ public class CreaTicketFinale extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
+        btnFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogVisualizzaFotoRapporto newFragment = new DialogVisualizzaFotoRapporto();
+                newFragment.setArguments(bundle);
+                newFragment.show(getFragmentManager(), "DialogFoto");
+            }
+        });
+
+
+
         btnConferma.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
+                oggetto = mOggetto.getText().toString();
                 richiesta = mRichiestaFornitore.getText().toString();
                 descrizione = mDescrizioneCondomino.getText().toString();
 
-                if ( ! richiesta.isEmpty() || ! descrizione.isEmpty() ) {
-                    addTicketIntervento(databaseReference, "OGGETTO", richiesta, descrizione, "EH BHO");
+                if ( ! oggetto.isEmpty() || ! richiesta.isEmpty() || ! descrizione.isEmpty() ) {
+
+                    addTicketIntervento(databaseReference, oggetto, richiesta, descrizione);
 
                     Intent intent = new Intent(getApplicationContext(), MainDrawer.class);
                     intent.putExtras(bundle);
@@ -146,7 +179,7 @@ public class CreaTicketFinale extends AppCompatActivity {
     }
 
     // TODO recupera messaggio condomino
-    private void addTicketIntervento(DatabaseReference postRef, final String oggetto, final String richiestaAFornitore, final String descrizioneCondomini, final String messaggioCondomino) {
+    private void addTicketIntervento(DatabaseReference postRef, final String oggetto, final String richiestaAFornitore, final String descrizioneCondomini) {
         postRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
@@ -163,29 +196,8 @@ public class CreaTicketFinale extends AppCompatActivity {
 
                 //Ricava la data e la formatta nel formato appropriato
                 Date newDate = new Date(new Date().getTime());
-                SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm ");
+                SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm ");
                 String stringdate = dt.format(newDate);
-
-
-//                TicketIntervento ticketIntervento = new TicketIntervento(
-//                                                                counter.toString(),
-//                                                                amministratore,     //
-//                                                                stringdate,         // DATA TICKET
-//                                                                "-",         // DATA ULTIMO AGG
-//                                                                fornitore,      //
-//                                                                messaggioCondomino,     //
-//                                                                aggiornamentoCondomini, //AGG CONDOMINO?
-//                                                                descrizioneCondomini,       //
-//                                                                oggetto,                //
-//                                                                "",                 //
-//                                                                richiesta,          //
-//                                                                stabile,            //
-//                                                                "In Attesa",        //
-//                                                                "1",                // PRIORITà
-//                                                                "-",                // FOTO
-//                                                                "nomeAmministratore",
-//                                                                "nomeStabile",
-//                                                                "indirizzoStabile");
 
                 //MessaggioCondomino m = new MessaggioCondomino(counter.toString(),stringdate,"Segnalazione", descrizioneSegnalazione,uidCondomino,uidAmministratore, stabile, percorsoFoto, urlFoto);
 
@@ -196,13 +208,17 @@ public class CreaTicketFinale extends AppCompatActivity {
                 mutableData.child(counter.toString()).child("data_ultimo_aggiornamento").setValue("-");
                 mutableData.child(counter.toString()).child("descrizione_condomini").setValue(descrizioneCondomini);
                 mutableData.child(counter.toString()).child("fornitore").setValue(uidFornitore);
-                mutableData.child(counter.toString()).child("foto").setValue("-");//TODO carica foto del condomino
-                mutableData.child(counter.toString()).child("messaggio_condomino").setValue(messaggioCondomino);
+                if ( mCheckBox.isChecked()) {
+                    mutableData.child(counter.toString()).child("foto").setValue(foto);
+                }else{
+                    mutableData.child(counter.toString()).child("foto").setValue("-");
+                }
                 mutableData.child(counter.toString()).child("oggetto").setValue(oggetto);
                 mutableData.child(counter.toString()).child("priorità").setValue("2");      // PRIORITà DI DEFAULT MEDIA
                 mutableData.child(counter.toString()).child("richiesta").setValue(richiestaAFornitore);
                 mutableData.child(counter.toString()).child("stabile").setValue(idStabile);
                 mutableData.child(counter.toString()).child("stato").setValue("in attesa");
+                mutableData.child(counter.toString()).child("numero_aggiornamenti").setValue("0");
                 //Setta il counter del nodo Messaggi_condomino
                 mutableData.child("counter").setValue(counter);
 
@@ -210,7 +226,6 @@ public class CreaTicketFinale extends AppCompatActivity {
                 return Transaction.success(mutableData);
 
             }
-
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, com.google.firebase.database.DataSnapshot dataSnapshot) {

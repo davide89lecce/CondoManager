@@ -72,9 +72,8 @@ public class AdapterSelezionaCategoriaIntervento extends RecyclerView.Adapter<Ad
                 final SharedPreferences sharedPrefs = context.getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("categoria", dataSet.get(listPosition).getName());
-                Log.d("ciao",sharedPrefs.getString("categoria", ""));
                 editor.apply();
-
+                Log.d("ciao",sharedPrefs.getString("categoria", ""));
             }
         });
 

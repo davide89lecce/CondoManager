@@ -10,8 +10,13 @@ public class Messaggio {
     private String messaggio;
     private String data;
     private String foto;
+    private String nomeCondomino;
+    private String nomeStabile;
+    private String letto;
 
-    public Messaggio(String id, String idCondomino, String idStabile, String tipologia, String messaggio, String data, String foto) {
+    public Messaggio (){}
+
+    public Messaggio(String id, String idCondomino, String idStabile, String tipologia, String messaggio, String data, String foto, String nomeCondomino, String nomeStabile, String letto) {
         this.id = id;
         this.idCondomino = idCondomino;
         this.idStabile = idStabile;
@@ -19,6 +24,9 @@ public class Messaggio {
         this.messaggio = messaggio;
         this.data = data;
         this.foto = foto;
+        this.nomeCondomino = nomeCondomino;
+        this.nomeStabile = nomeStabile;
+        this.letto = letto;
     }
 
 
@@ -78,4 +86,27 @@ public class Messaggio {
         this.foto = foto;
     }
 
+    public String getNomeCondomino() {
+        return nomeCondomino;
+    }
+
+    public void setNomeCondomino(String nomeCondomino) {
+        this.nomeCondomino = nomeCondomino;
+    }
+
+    public String getNomeStabile() {
+        return nomeStabile;
+    }
+
+    public void setNomeStabile(String nomeStabile) {
+        this.nomeStabile = nomeStabile;
+    }
+
+    public String getLetto() {
+        return letto;
+    }
+
+    public void setLetto(String letto) {
+        this.letto = letto;
+    }
 }

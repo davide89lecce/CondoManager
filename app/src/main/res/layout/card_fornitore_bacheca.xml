@@ -18,81 +18,116 @@
         card_view:cardUseCompatPadding="true">
 
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/list_card_view_fornitore"
-            >
+            android:layout_marginTop="3dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/DettaglioFornCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="1dp"
+                android:text="qui apparirà categoria"
+                android:textAlignment="textEnd"
+                android:textStyle="italic"
+                card_view:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/DettaglioFornNome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="7dp"
+                android:text="qui apparirà nome azienda"
+                card_view:layout_constraintLeft_toRightOf="@+id/textViewDettaglioFornNome"
+                card_view:layout_constraintTop_toBottomOf="@+id/DettaglioFornCategoria"
+                android:layout_marginRight="8dp"
+                card_view:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textViewDettaglioFornNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Azienda:"
+                android:textStyle="bold"
+                card_view:layout_constraintBaseline_toBaselineOf="@+id/DettaglioFornNome"
+                card_view:layout_constraintLeft_toRightOf="@+id/imageViewFornitore" />
+
+            <TextView
+                android:id="@+id/textViewDettaglioFornTitolare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:text="Titolare:"
+                android:textStyle="bold"
+                card_view:layout_constraintLeft_toRightOf="@+id/imageViewFornitore"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewDettaglioFornNome" />
+
+            <TextView
+                android:id="@+id/textViewUidFornitore"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/transparent"
+                android:textSize="0sp"
+                card_view:layout_constraintRight_toLeftOf="@+id/DettaglioFornCategoria"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/DettaglioFornTitolare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="qui apparirà il titolare"
+                card_view:layout_constraintLeft_toLeftOf="@+id/DettaglioFornNome"
+                card_view:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/DettaglioFornNome"
+                card_view:layout_constraintHorizontal_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/D_BarraColorata"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="0dp"
+                android:background="@android:color/holo_blue_light"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintRight_toRightOf="@+id/imageViewFornitore"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/imageViewFornitore"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="10dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="0.50"
                 android:src="@drawable/logo_fornitore"
-                android:tag="image_tag" />
+                android:tag="image_tag"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.5" />
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="3dp"
-                android:layout_weight="2"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:id="@+id/DettaglioFornCategoria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="qui apparirà categoria"
-                    card_view:layout_constraintLeft_toLeftOf="@+id/DettaglioFornNome"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:id="@+id/DettaglioFornNome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="qui apparirà nome azienda"
-                    card_view:layout_constraintTop_toBottomOf="@+id/textViewDettaglioFornNome"
-                    tools:layout_editor_absoluteX="20dp" />
-
-                <TextView
-                    android:id="@+id/textViewDettaglioFornNome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nome azienda"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="8dp"
-                    card_view:layout_constraintLeft_toLeftOf="parent"
-                    card_view:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="8dp" />
-
-                <TextView
-                    android:id="@+id/textViewDettaglioFornCategoria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Categoria"
-                    android:textStyle="bold"
-                    card_view:layout_constraintLeft_toLeftOf="@+id/textViewDettaglioFornNome"
-                    android:layout_marginBottom="3dp"
-                    card_view:layout_constraintBottom_toTopOf="@+id/DettaglioFornCategoria" />
-
-                <TextView
-                    android:id="@+id/textViewUidFornitore"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:textColor="@android:color/transparent"
-                    android:textSize="0sp"
-                    tools:layout_editor_absoluteX="268dp"
-                    tools:layout_editor_absoluteY="50dp" />
-
-            </android.support.constraint.ConstraintLayout>
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 

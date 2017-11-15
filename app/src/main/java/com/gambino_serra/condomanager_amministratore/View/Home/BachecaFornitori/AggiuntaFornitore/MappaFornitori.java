@@ -187,7 +187,7 @@ public class MappaFornitori extends FragmentActivity implements
     }
 
     /**
-     * Il metodo verifica che i servizi di Google siano disponibili, in caso contrario una Dialog viene visualizzata al'utente.
+     * Il metodo verifica che i servizi di Google siano disponibili, in caso contrario una NuovoAvviso viene visualizzata al'utente.
      */
     private boolean isGooglePlayServicesAvailable() {
 
@@ -200,10 +200,10 @@ public class MappaFornitori extends FragmentActivity implements
             return true;
             }
         else {
-            // Ricevo la Error Dialog dai servizi Google Play.
+            // Ricevo la Error NuovoAvviso dai servizi Google Play.
             Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
 
-            // Se Google Play services puo' fornire una Error Dialog
+            // Se Google Play services puo' fornire una Error NuovoAvviso
             if (errorDialog != null) {
                 // Creazione di un DialogFragment
                 ErrorDialogFragment errorFragment = new ErrorDialogFragment();
@@ -411,7 +411,7 @@ public class MappaFornitori extends FragmentActivity implements
             }
 
     /**
-     * Il metodo gestisce la comunicazione, tramite Dialog, degli errori che possono verificarsi.
+     * Il metodo gestisce la comunicazione, tramite NuovoAvviso, degli errori che possono verificarsi.
      */
     public static class ErrorDialogFragment extends DialogFragment {
 

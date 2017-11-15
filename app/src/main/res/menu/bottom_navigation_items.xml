@@ -3,7 +3,7 @@
     <item
         android:id="@+id/action_item1"
         android:icon="@drawable/logo_cond"
-        android:title="@string/tab_bacheca_condomini" />
+        android:title="@string/tab_bacheca_stabili" />
     <item
         android:id="@+id/action_item2"
         android:icon="@drawable/logo_mondo"

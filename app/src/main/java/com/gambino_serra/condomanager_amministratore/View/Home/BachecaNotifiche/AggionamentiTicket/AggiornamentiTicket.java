@@ -1,17 +1,13 @@
 package com.gambino_serra.condomanager_amministratore.View.Home.BachecaNotifiche.AggionamentiTicket;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.client.ChildEventListener;
@@ -23,10 +19,9 @@ import com.firebase.client.ValueEventListener;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.CardTicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.Entity.TicketIntervento;
 import com.gambino_serra.condomanager_amministratore.Model.FirebaseDB.FirebaseDB;
-import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Interventi.In_Corso.AdapterInterventiInCorso;
+import com.gambino_serra.condomanager_amministratore.View.SezioneStabile.Stabile_Interventi.Intervento.Intervento;
 import com.gambino_serra.condomanager_amministratore.tesi.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,62 +36,47 @@ public class AggiornamentiTicket extends AppCompatActivity {
     private Firebase firebaseDB;
     Context context;
 
-
-
     private FirebaseAuth firebaseAuth;
     private String uidAmministratore;
     Map<String, Object> ticketInterventoMap;
     ArrayList<CardTicketIntervento> interventi;
-
     ArrayList<String> rapportiAziende;
     Integer numeroAggiornamentiTicket = 0;
 
     public static AggiornamentiTicket newInstance() {
         AggiornamentiTicket fragment = new AggiornamentiTicket();
         return fragment;
-    }
+        }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.aggiornamenti_ticket);
-
+        setContentView(R.layout.aggiornamenti_notifiche_ticket);
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-    }
+        }
 
 
     @Override
     public void onStart() {
         super.onStart();
 
+        context = getApplicationContext();
+
         firebaseAuth = FirebaseAuth.getInstance();
         data = new ArrayList<TicketIntervento>();
         ticketInterventoMap = new HashMap<String,Object>();
         interventi = new ArrayList<CardTicketIntervento>();
         rapportiAziende = new ArrayList<String>();
-
-        // Avvaloro i nuovi rierimenti al layout
-
-
-
-        //myOnClickListener = new MyOnClickListener(context);
-
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_aggiornamenti_ticket);
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_notifiche_ticket);
         recyclerView.setHasFixedSize(true);
-
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         uidAmministratore = firebaseAuth.getCurrentUser().getUid().toString();
 
+        myOnClickListener = new  AggiornamentiTicket.MyOnClickListener(context);
+
         //lettura di TUTTI i fornitori
-
-
-
         Query query;
         query = FirebaseDB.getInterventi().orderByChild("amministratore").equalTo(uidAmministratore);
 
@@ -156,38 +136,53 @@ public class AggiornamentiTicket extends AppCompatActivity {
                 nomeAmm.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        ticketInterventoMap2.put("nomeAmministratore", dataSnapshot.getValue().toString() );
+                        ticketInterventoMap2.put("nomeAmministratore", dataSnapshot.getValue().toString());
 
+                        Firebase nomeStabile = FirebaseDB.getStabili()
+                                .child(ticketInterventoMap.get("stabile").toString())
+                                .child("nome");
+                        nomeStabile.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                ticketInterventoMap2.put("nomeStabile", dataSnapshot.getValue().toString());
 
-                        // Avvaloro tutti i dati della card che mi interessano inserendone i relativi dati
-                        // anche quelli provenienti dallo stabile sovrascrivendo i codici passati in ticketIntervento
-                        // Avvaloriamo una variabile TicketIntervento appositamente creata in modo da inserire poi questo
-                        // oggetto all'interno di un Array di interventi che utilizzeremo per popolare la lista Recycle
-                        //try {
-                        CardTicketIntervento cardTicketIntervento = new CardTicketIntervento(
-                                ticketInterventoMap.get("idIntervento").toString(),
-                                ticketInterventoMap.get("stabile").toString(),
-                                ticketInterventoMap.get("oggetto").toString(),
-                                ticketInterventoMap.get("priorità").toString(),
-                                ticketInterventoMap.get("stato").toString(),
-                                ticketInterventoMap.get("descrizione_condomini").toString(),
-                                ticketInterventoMap.get("aggiornamento_condomini").toString(),
-                                ticketInterventoMap.get("data_ticket").toString(),
-                                ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
-                                ticketInterventoMap.get("numero_aggiornamenti").toString()
-                        );
+                                // Avvaloro tutti i dati della card che mi interessano inserendone i relativi dati
+                                // anche quelli provenienti dallo stabile sovrascrivendo i codici passati in ticketIntervento
+                                // Avvaloriamo una variabile TicketIntervento appositamente creata in modo da inserire poi questo
+                                // oggetto all'interno di un Array di interventi che utilizzeremo per popolare la lista Recycle
+                                //try {
+                                CardTicketIntervento cardTicketIntervento = new CardTicketIntervento(
+                                        ticketInterventoMap.get("idIntervento").toString(),
+                                        ticketInterventoMap2.get("nomeStabile").toString(),
+                                        ticketInterventoMap.get("oggetto").toString(),
+                                        ticketInterventoMap.get("priorità").toString(),
+                                        ticketInterventoMap.get("stato").toString(),
+                                        ticketInterventoMap.get("descrizione_condomini").toString(),
+                                        ticketInterventoMap.get("aggiornamento_condomini").toString(),
+                                        ticketInterventoMap.get("data_ticket").toString(),
+                                        ticketInterventoMap.get("data_ultimo_aggiornamento").toString(),
+                                        ticketInterventoMap.get("numero_aggiornamenti").toString()
+                                );
 
-                        if ( ! cardTicketIntervento.getNumeroAggiornamenti().equals("0"))
-                            interventi.add(cardTicketIntervento);
+                                if (!cardTicketIntervento.getNumeroAggiornamenti().equals("0"))
+                                    interventi.add(cardTicketIntervento);
 
-                        adapter = new AdapterAggiornamentiTicket(interventi);
-                        recyclerView.setAdapter(adapter);
+                                adapter = new AdapterAggiornamentiTicket(interventi);
+                                recyclerView.setAdapter(adapter);
+
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+                            }
+                        });
 
                     }
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+                        }
 
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) { }
-                });
+                    });
             }
 
             @Override
@@ -203,5 +198,36 @@ public class AggiornamentiTicket extends AppCompatActivity {
             public void onCancelled(FirebaseError firebaseError) { }
         });
     }
+
+    private static class MyOnClickListener extends AppCompatActivity implements View.OnClickListener {
+
+        private final Context context;
+
+        private MyOnClickListener(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public void onClick(View v) {
+            detailsIntervento(v,context);
+        }
+
+        private void detailsIntervento(View v, Context context) {
+
+            int selectedItemPosition = recyclerView.getChildPosition(v);
+            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForPosition(selectedItemPosition);
+            TextView textViewName = (TextView) viewHolder.itemView.findViewById(R.id.IDTicket);
+            String selectedName = (String) textViewName.getText();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("idIntervento", selectedName);
+
+            Intent intent = new Intent( context, Intervento.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+    }
+
 
 }

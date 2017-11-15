@@ -228,17 +228,17 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1043006803764:android:9f58c3503f0c1947",
+        "mobilesdk_app_id": "1:1043006803764:android:bcb4803e2d2e350f",
         "android_client_info": {
-          "package_name": "com.gambino_serra.condominew_fornitore"
+          "package_name": "com.gambino_serra.new_condomanager_fornitore"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1043006803764-eftpo0qtlhagsg308vl5bpue4vgb8mi4.apps.googleusercontent.com",
+          "client_id": "1043006803764-kd2l6atkjrddpgoie4dkl7eo6obtngr0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gambino_serra.condominew_fornitore",
+            "package_name": "com.gambino_serra.new_condomanager_fornitore",
             "certificate_hash": "dc7c620a539e53d4f4c7c45bc1edaccf55caf21a"
           }
         },
@@ -272,18 +272,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1043006803764:android:d8861369b5eb3423",
+        "mobilesdk_app_id": "1:1043006803764:android:e6b65c45e61c64c1",
         "android_client_info": {
-          "package_name": "com.gambino_serra.condominew_condomino"
+          "package_name": "com.gambino_serra.new_condomanager_amministratore"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1043006803764-a5v141bvq60itf8sgrbvj6t9qorr98li.apps.googleusercontent.com",
+          "client_id": "1043006803764-t59vrtq7qns048m36krtvl8v3hgi6pj7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gambino_serra.condominew_condomino",
-            "certificate_hash": "a0b3a2647c5738064eec899cf6f1f8d4c72f8a5c"
+            "package_name": "com.gambino_serra.new_condomanager_amministratore",
+            "certificate_hash": "dc7c620a539e53d4f4c7c45bc1edaccf55caf21a"
           }
         },
         {
@@ -308,37 +308,6 @@
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1043006803764:android:0a31c9b5938f3244",
-        "android_client_info": {
-          "package_name": "com.gambino_serra.condominew_amministratore"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1043006803764-fmg6mk6hct126siu4j03587lvluf2jsd.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCYb7tPc2AXJzMCijXMCqBrBW38hIkF4D8"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
