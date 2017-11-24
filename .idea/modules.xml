@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CondoManager.iml" filepath="$PROJECT_DIR$/CondoManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CondoManager_Amministratore.iml" filepath="$PROJECT_DIR$/CondoManager_Amministratore.iml" />
       <module fileurl="file://$PROJECT_DIR$/NEW_CondoManager_Amministratore.iml" filepath="$PROJECT_DIR$/NEW_CondoManager_Amministratore.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
